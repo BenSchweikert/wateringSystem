@@ -30,6 +30,24 @@ class MCP3008:
     def close(self):
         self.spi.close()
 
+def watering(relay,pump):
+     pass
+    #GPIO.output(relay, False)
+    #time.sleep(pump)
+    #GPIO.output(relay, True)
+    #time.sleep(1)
+
+def load_sensor_config():
+    config = configparser.ConfigParser()
+    config.read('sensor_config.ini')
+    return config
+
+def calc_percent_hum(configData,data):
+  #(680 - data) / 680 * 100
+  value = (configData - data) / configData *100
+#  print("ConfigDate: ", configData, ", Data: ", data)
+  return value
+
 def calibrateSensor(calibCycles):
   config = configparser.ConfigParser()
   # PINS FESTLEGEN

@@ -10,6 +10,8 @@ import time
 from time import localtime, strftime
 import configparser
 
+from functions import *
+
 # CLASS & FUNCTIONS
 class MCP3008:
     def __init__(self, bus = 0, device = 0):
@@ -33,24 +35,6 @@ class MCP3008:
            return 0
     def close(self):
         self.spi.close()
-
-def watering(relay,pump):
-     pass
-    #GPIO.output(relay, False)
-    #time.sleep(pump)
-    #GPIO.output(relay, True)
-    #time.sleep(1)
-
-def load_sensor_config():
-    config = configparser.ConfigParser()
-    config.read('sensor_config.ini')
-    return config
-
-def calc_percent_hum(configData,data):
-  #(680 - data) / 680 * 100
-  value = (configData - data) / configData *100
-#  print("ConfigDate: ", configData, ", Data: ", data)
-  return value
 
 #GPIO.cleanup()
 sensor_config = load_sensor_config()
