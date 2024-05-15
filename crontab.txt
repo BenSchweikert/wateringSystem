@@ -1,0 +1,4 @@
+@reboot /home/pi/boot.py
+@hourly /home/pi/led.py
+0 8 * * * /home/pi/waterpi.py
+0 20 * * * /home/pi/waterpi.py
