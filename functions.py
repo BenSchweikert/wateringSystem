@@ -72,6 +72,7 @@ def createHtml():
 
   # Add legend
   p.legend.location = "top_left"
+  p.legend.click_policy = "hide"
 
   # Set plot properties
   p.xaxis.axis_label = "Date"
