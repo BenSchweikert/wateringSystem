@@ -153,7 +153,7 @@ def calibrateSensor(calibCycles):
   config['Sensor{}'.format(4)] = {'calibration_output': str(value4)}
   config['Sensor{}'.format(5)] = {'calibration_output': str(value5)}
 
-  with open('sensor_config.ini', 'w') as configfile:
+  with open('//home//ben//wateringSystem//sensor_config.ini', 'w') as configfile:
     config.write(configfile)
 
   time.sleep(2)
