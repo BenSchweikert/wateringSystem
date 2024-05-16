@@ -109,39 +109,40 @@ def calibrateSensor(calibCycles):
   # FÜHLER ABFRAGEN
   GPIO.output(strom_sensoren, GPIO.HIGH)
   time.sleep(3)
+  value0, value1, value2, value3, value4, value5 = readSensors(calibCycles)
   
-  value0 = 0
-  value1 = 0
-  value2 = 0
-  value3 = 0
-  value4 = 0
-  value5 = 0
+#   value0 = 0
+#   value1 = 0
+#   value2 = 0
+#   value3 = 0
+#   value4 = 0
+#   value5 = 0
 
-  adc = MCP3008()
+#   adc = MCP3008()
   
-  for x in range(calibCycles):
-    #print("Calib. Iteration running: ", x+1)
-    raw0 = adc.read( channel = 0 ) # Den auszulesenden Channel kannst du natürlich anpassen
-    raw1 = adc.read( channel = 1 ) # Den auszulesenden Channel kannst du natürlich anpassen
-    raw2 = adc.read( channel = 2 ) # Den auszulesenden Channel kannst du natürlich anpassen
-    raw3 = adc.read( channel = 3 ) # Den auszulesenden Channel kannst du natürlich anpassen
-    raw4 = adc.read( channel = 4 ) # Den auszulesenden Channel kannst du natürlich anpassen
-    raw5 = adc.read( channel = 5 ) # Den auszulesenden Channel kannst du natürlich anpassen
-    value0 = value0 + raw0
-    value1 = value1 + raw1
-    value2 = value2 + raw2
-    value3 = value3 + raw3
-    value4 = value4 + raw4
-    value5 = value5 + raw5
-    print("Calib. Iteration done:", x+1, " -> ", raw0, " ", raw1, " ", raw2, " ", raw3, " ", raw4, " ", raw5)
-    time.sleep(1)
-#  print("Calib. Iterations per Sensor: ", x+1)
-  value0 = int(round(value0 / (x+1),0))
-  value1 = int(round(value1 / (x+1),0))
-  value2 = int(round(value2 / (x+1),0))
-  value3 = int(round(value3 / (x+1),0))
-  value4 = int(round(value4 / (x+1),0))
-  value5 = int(round(value5 / (x+1),0))
+#   for x in range(calibCycles):
+#     #print("Calib. Iteration running: ", x+1)
+#     raw0 = adc.read( channel = 0 ) # Den auszulesenden Channel kannst du natürlich anpassen
+#     raw1 = adc.read( channel = 1 ) # Den auszulesenden Channel kannst du natürlich anpassen
+#     raw2 = adc.read( channel = 2 ) # Den auszulesenden Channel kannst du natürlich anpassen
+#     raw3 = adc.read( channel = 3 ) # Den auszulesenden Channel kannst du natürlich anpassen
+#     raw4 = adc.read( channel = 4 ) # Den auszulesenden Channel kannst du natürlich anpassen
+#     raw5 = adc.read( channel = 5 ) # Den auszulesenden Channel kannst du natürlich anpassen
+#     value0 = value0 + raw0
+#     value1 = value1 + raw1
+#     value2 = value2 + raw2
+#     value3 = value3 + raw3
+#     value4 = value4 + raw4
+#     value5 = value5 + raw5
+#     print("Calib. Iteration done:", x+1, " -> ", raw0, " ", raw1, " ", raw2, " ", raw3, " ", raw4, " ", raw5)
+#     time.sleep(1)
+# #  print("Calib. Iterations per Sensor: ", x+1)
+#   value0 = int(round(value0 / (x+1),0))
+#   value1 = int(round(value1 / (x+1),0))
+#   value2 = int(round(value2 / (x+1),0))
+#   value3 = int(round(value3 / (x+1),0))
+#   value4 = int(round(value4 / (x+1),0))
+#   value5 = int(round(value5 / (x+1),0))
 
   if value0 < 500:
     value0 = int((value1 + value2 + value3 + value4 + value5)/5)
@@ -176,4 +177,39 @@ def calibrateSensor(calibCycles):
   GPIO.output(strom_sensoren, GPIO.LOW)
   time.sleep(0.5)
   GPIO.cleanup()
+  return value0, value1, value2, value3, value4, value5
+
+def readSensors(calibCycles):
+  adc = MCP3008()
+  value0 = 0
+  value1 = 0
+  value2 = 0
+  value3 = 0
+  value4 = 0
+  value5 = 0
+  
+  for x in range(calibCycles):
+    #print("Calib. Iteration running: ", x+1)
+    raw0 = adc.read( channel = 0 ) # Den auszulesenden Channel kannst du natürlich anpassen
+    raw1 = adc.read( channel = 1 ) # Den auszulesenden Channel kannst du natürlich anpassen
+    raw2 = adc.read( channel = 2 ) # Den auszulesenden Channel kannst du natürlich anpassen
+    raw3 = adc.read( channel = 3 ) # Den auszulesenden Channel kannst du natürlich anpassen
+    raw4 = adc.read( channel = 4 ) # Den auszulesenden Channel kannst du natürlich anpassen
+    raw5 = adc.read( channel = 5 ) # Den auszulesenden Channel kannst du natürlich anpassen
+    value0 = value0 + raw0
+    value1 = value1 + raw1
+    value2 = value2 + raw2
+    value3 = value3 + raw3
+    value4 = value4 + raw4
+    value5 = value5 + raw5
+    print("Calib. Iteration done:", x+1, " -> ", raw0, " ", raw1, " ", raw2, " ", raw3, " ", raw4, " ", raw5)
+    time.sleep(1)
+#  print("Calib. Iterations per Sensor: ", x+1)
+  value0 = int(round(value0 / (x+1),0))
+  value1 = int(round(value1 / (x+1),0))
+  value2 = int(round(value2 / (x+1),0))
+  value3 = int(round(value3 / (x+1),0))
+  value4 = int(round(value4 / (x+1),0))
+  value5 = int(round(value5 / (x+1),0))
+
   return value0, value1, value2, value3, value4, value5
