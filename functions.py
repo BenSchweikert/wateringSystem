@@ -6,6 +6,9 @@ import sys
 import spidev
 from spidev import SpiDev
 import time
+import pandas as pd
+from datetime import datetime
+from bokeh.plotting import figure, output_file, save
 
 import configparser
 
@@ -32,7 +35,7 @@ class MCP3008:
 
 def watering(relay,pump):
     pass
-    print("Starting pump(relais) ", str(relay), " for ", str(pump), " seconds.")
+    #print("Starting pump(relais) ", str(relay), " for ", str(pump), " seconds.")
     #GPIO.output(relay, False)
     #time.sleep(pump)
     #GPIO.output(relay, True)
@@ -48,6 +51,36 @@ def calc_percent_hum(configData,data):
   value = (configData - data) / configData *100
 #  print("ConfigDate: ", configData, ", Data: ", data)
   return value
+
+def createHtml():
+  df = pd.read_csv('datenlog.log', header=None, names=['Date', 'Sensor1', 'Sensor2', 'Sensor3', 'Sensor4', 'Sensor5', 'Sensor6'])
+
+  # Convert 'Date' column to datetime object
+  df['Date'] = pd.to_datetime(df['Date'])
+
+  # Create a new Bokeh figure
+  p = figure(x_axis_type="datetime", title="Sensor Readings Over Time")
+
+  # Add lines for each sensor
+  p.line(df['Date'], df['Sensor1'], legend_label="Sensor 1", line_width=2, line_color="blue")
+  p.line(df['Date'], df['Sensor2'], legend_label="Sensor 2", line_width=2, line_color="green")
+  p.line(df['Date'], df['Sensor3'], legend_label="Sensor 3", line_width=2, line_color="red")
+  p.line(df['Date'], df['Sensor4'], legend_label="Sensor 4", line_width=2, line_color="orange")
+  p.line(df['Date'], df['Sensor5'], legend_label="Sensor 5", line_width=2, line_color="purple")
+  p.line(df['Date'], df['Sensor6'], legend_label="Sensor 6", line_width=2, line_color="brown")
+
+  # Add legend
+  p.legend.location = "top_left"
+
+  # Set plot properties
+  p.xaxis.axis_label = "Date"
+  p.yaxis.axis_label = "Sensor Value"
+
+  # Set output file
+  output_file("//var//www//html//index.html")
+
+  # Save the plot
+  save(p)
 
 def calibrateSensor(calibCycles):
   config = configparser.ConfigParser()
