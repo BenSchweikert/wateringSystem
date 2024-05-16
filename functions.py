@@ -7,7 +7,7 @@ import spidev
 from spidev import SpiDev
 import time
 import pandas as pd
-from datetime import datetime
+from datetime import datetime, timedelta
 from bokeh.plotting import figure, output_file, save
 from bokeh.models import HoverTool
 
@@ -58,6 +58,12 @@ def createHtml():
 
   # Convert 'Date' column to datetime object
   df['Date'] = pd.to_datetime(df['Date'])
+
+  # Calculate the start date (one week ago from today)
+  start_date = datetime.now() - timedelta(days=7)
+
+  # Filter DataFrame to include only rows within the desired date range
+  df = df[df['Date'] >= start_date]
 
   # Create a new Bokeh figure
   p = figure(x_axis_type="datetime", title="Sensor Readings Over Time", width=1200, height=600, y_range=[0,100])
