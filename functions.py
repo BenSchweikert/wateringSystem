@@ -59,7 +59,7 @@ def createHtml():
   df['Date'] = pd.to_datetime(df['Date'])
 
   # Create a new Bokeh figure
-  p = figure(x_axis_type="datetime", title="Sensor Readings Over Time")
+  p = figure(x_axis_type="datetime", title="Sensor Readings Over Time", width=1600, height=600, y_range=[0,100])
 
   # Add lines for each sensor
   p.line(df['Date'], df['Sensor1'], legend_label="Sensor 1", line_width=2, line_color="blue")
