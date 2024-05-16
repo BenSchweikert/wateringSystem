@@ -141,6 +141,12 @@ def calibrateSensor(calibCycles):
 
 def readSensors(calibCycles):
   strom_sensoren = 5
+  relais1 = 11
+  relais2 = 13
+  relais3 = 15
+  relais4 = 16
+  relais5 = 18
+  relais6 = 22
   # GPIO SETUP
   GPIO.setwarnings(False)                         # Fehlermeldungen deaktivieren
   GPIO.setmode(GPIO.BOARD)
