@@ -100,6 +100,26 @@ def createHtml():
 
 def calibrateSensor(calibCycles):
   strom_sensoren = 5
+  relais1 = 11
+  relais2 = 13
+  relais3 = 15
+  relais4 = 16
+  relais5 = 18
+  relais6 = 22
+  # GPIO SETUP
+  GPIO.setwarnings(False)                         # Fehlermeldungen deaktivieren
+  GPIO.setmode(GPIO.BOARD)
+  GPIO.setup(strom_sensoren, GPIO.OUT)
+  GPIO.setup(relais1, GPIO.OUT)
+  GPIO.setup(relais2, GPIO.OUT)
+  GPIO.setup(relais3, GPIO.OUT)
+  GPIO.setup(relais4, GPIO.OUT)
+  GPIO.setup(relais5, GPIO.OUT)
+  GPIO.setup(relais6, GPIO.OUT)
+
+  # SENSOREN ABFRAGEN
+  GPIO.output(strom_sensoren, GPIO.HIGH)
+  time.sleep(3)
   config = configparser.ConfigParser()
 
   value0, value1, value2, value3, value4, value5 = readSensors(calibCycles)
@@ -141,27 +161,6 @@ def calibrateSensor(calibCycles):
   return value0, value1, value2, value3, value4, value5
 
 def readSensors(calibCycles):
-  strom_sensoren = 5
-  relais1 = 11
-  relais2 = 13
-  relais3 = 15
-  relais4 = 16
-  relais5 = 18
-  relais6 = 22
-  # GPIO SETUP
-  GPIO.setwarnings(False)                         # Fehlermeldungen deaktivieren
-  GPIO.setmode(GPIO.BOARD)
-  GPIO.setup(strom_sensoren, GPIO.OUT)
-  GPIO.setup(relais1, GPIO.OUT)
-  GPIO.setup(relais2, GPIO.OUT)
-  GPIO.setup(relais3, GPIO.OUT)
-  GPIO.setup(relais4, GPIO.OUT)
-  GPIO.setup(relais5, GPIO.OUT)
-  GPIO.setup(relais6, GPIO.OUT)
-
-  # SENSOREN ABFRAGEN
-  GPIO.output(strom_sensoren, GPIO.HIGH)
-  time.sleep(3)
   adc = MCP3008()
   value0 = 0
   value1 = 0
@@ -193,10 +192,5 @@ def readSensors(calibCycles):
   value3 = int(round(value3 / (x+1),0))
   value4 = int(round(value4 / (x+1),0))
   value5 = int(round(value5 / (x+1),0))
-
-  time.sleep(2)
-  GPIO.output(strom_sensoren, GPIO.LOW)
-  time.sleep(0.5)
-  GPIO.cleanup()
 
   return value0, value1, value2, value3, value4, value5

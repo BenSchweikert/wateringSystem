@@ -66,7 +66,33 @@ trocken = [15,25,10]
 feucht = [25,35,5]
 cann = [0,15, 15]
 
+strom_sensoren = 5
+relais1 = 11
+relais2 = 13
+relais3 = 15
+relais4 = 16
+relais5 = 18
+relais6 = 22
+# GPIO SETUP
+GPIO.setwarnings(False)                         # Fehlermeldungen deaktivieren
+GPIO.setmode(GPIO.BOARD)
+GPIO.setup(strom_sensoren, GPIO.OUT)
+GPIO.setup(relais1, GPIO.OUT)
+GPIO.setup(relais2, GPIO.OUT)
+GPIO.setup(relais3, GPIO.OUT)
+GPIO.setup(relais4, GPIO.OUT)
+GPIO.setup(relais5, GPIO.OUT)
+GPIO.setup(relais6, GPIO.OUT)
+
+# SENSOREN ABFRAGEN
+GPIO.output(strom_sensoren, GPIO.HIGH)
+time.sleep(3)
 sensor1, sensor2, sensor3, sensor4, sensor5, sensor6 = readSensors(3) # Anzahl der Zyklen
+
+time.sleep(2)
+GPIO.output(strom_sensoren, GPIO.LOW)
+time.sleep(0.5)
+GPIO.cleanup()
 
 sensor1 = calc_percent_hum(float(sensor_config['Sensor0']['calibration_output']),sensor1)
 sensor2 = calc_percent_hum(float(sensor_config['Sensor1']['calibration_output']),sensor2)
@@ -143,12 +169,6 @@ elif feucht[0] <= sensor6 <= feucht[1]:
 #print(zeitpunkt+",{:.1f}%".format(sensor1)+",{:.1f}%".format(sensor2)+",{:.1f}%".format(sensor3)+",{:.1f}%".format(sensor4)+",{:.1f}%".format(sensor5)+",{:.1f}%".format(sensor6))
 #print(zeitpunkt+","+str(sensor1)+","+str(sensor2)+","+str(sensor3)+","+str(sensor4)+","+str(sensor5)+","+str(sensor6))
 print(zeitpunkt+",{:.1f}".format(sensor1)+",{:.1f}".format(sensor2)+",{:.1f}".format(sensor3)+",{:.1f}".format(sensor4)+",{:.1f}".format(sensor5)+",{:.1f}".format(sensor6))
-
-strom_sensoren = 5
-time.sleep(2)
-GPIO.output(strom_sensoren, GPIO.LOW)
-time.sleep(0.5)
-GPIO.cleanup()
 
 # Create HTML Plot
 createHtml()
