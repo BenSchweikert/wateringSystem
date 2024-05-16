@@ -42,7 +42,7 @@ sensor_config = load_sensor_config()
 
 # LOG
 zeitpunkt = strftime("%Y-%m-%d %H:%M:00", time.localtime())
-sys.stdout = open("datenlog.log", "a")
+sys.stdout = open("//home//ben//wateringSystem//datenlog.log", "a")
 
 
 # PINS FESTLEGEN

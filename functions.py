@@ -43,7 +43,7 @@ def watering(relay,pump):
 
 def load_sensor_config():
     config = configparser.ConfigParser()
-    config.read('sensor_config.ini')
+    config.read('//home//ben//wateringSystem//sensor_config.ini')
     return config
 
 def calc_percent_hum(configData,data):
@@ -53,7 +53,7 @@ def calc_percent_hum(configData,data):
   return value
 
 def createHtml():
-  df = pd.read_csv('datenlog.log', header=None, names=['Date', 'Sensor1', 'Sensor2', 'Sensor3', 'Sensor4', 'Sensor5', 'Sensor6'])
+  df = pd.read_csv('//home//ben//wateringSystem//datenlog.log', header=None, names=['Date', 'Sensor1', 'Sensor2', 'Sensor3', 'Sensor4', 'Sensor5', 'Sensor6'])
 
   # Convert 'Date' column to datetime object
   df['Date'] = pd.to_datetime(df['Date'])
