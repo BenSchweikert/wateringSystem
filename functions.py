@@ -133,10 +133,10 @@ def calibrateSensor(calibCycles):
   with open('//home//ben//wateringSystem//sensor_config.ini', 'w') as configfile:
     config.write(configfile)
 
-  time.sleep(2)
-  GPIO.output(strom_sensoren, GPIO.LOW)
-  time.sleep(0.5)
-  GPIO.cleanup()
+  # time.sleep(2)
+  # GPIO.output(strom_sensoren, GPIO.LOW)
+  # time.sleep(0.5)
+  # GPIO.cleanup()
   return value0, value1, value2, value3, value4, value5
 
 def readSensors(calibCycles):
