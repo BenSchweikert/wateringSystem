@@ -9,6 +9,7 @@ import time
 import pandas as pd
 from datetime import datetime
 from bokeh.plotting import figure, output_file, save
+from bokeh.models import HoverTool
 
 import configparser
 
@@ -83,7 +84,7 @@ def createHtml():
     mode = 'vline'
   )
   p.add_tools(hover)
-  
+
   # Set output file
   output_file("//var//www//html//index.html")
 
