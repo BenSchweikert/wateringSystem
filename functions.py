@@ -99,6 +99,7 @@ def createHtml():
   save(p)
 
 def calibrateSensor(calibCycles):
+  strom_sensoren = 5
   config = configparser.ConfigParser()
 
   value0, value1, value2, value3, value4, value5 = readSensors(calibCycles)
@@ -139,6 +140,7 @@ def calibrateSensor(calibCycles):
   return value0, value1, value2, value3, value4, value5
 
 def readSensors(calibCycles):
+  strom_sensoren = 5
   # GPIO SETUP
   GPIO.setwarnings(False)                         # Fehlermeldungen deaktivieren
   GPIO.setmode(GPIO.BOARD)

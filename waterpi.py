@@ -45,7 +45,6 @@ sys.stdout = open("//home//ben//wateringSystem//datenlog.log", "a")
 
 
 # PINS FESTLEGEN
-strom_sensoren = 5
 relais1 = 11
 relais2 = 13
 relais3 = 15
