@@ -38,7 +38,6 @@ class MCP3008:
 
 #GPIO.cleanup()
 sensor_config = load_sensor_config()
-#print(sensor_config['Sensor0']['calibration_output'])
 
 # LOG
 zeitpunkt = strftime("%Y-%m-%d %H:%M:00", time.localtime())
@@ -68,29 +67,6 @@ trocken = [15,25,10]
 feucht = [25,35,5]
 cann = [0,15, 15]
 
-
-# GPIO SETUP
-GPIO.setwarnings(False)                         # Fehlermeldungen deaktivieren
-GPIO.setmode(GPIO.BOARD)
-GPIO.setup(strom_sensoren, GPIO.OUT)
-GPIO.setup(relais1, GPIO.OUT)
-GPIO.setup(relais2, GPIO.OUT)
-GPIO.setup(relais3, GPIO.OUT)
-GPIO.setup(relais4, GPIO.OUT)
-GPIO.setup(relais5, GPIO.OUT)
-GPIO.setup(relais6, GPIO.OUT)
-
-
-# SENSOREN ABFRAGEN
-GPIO.output(strom_sensoren, GPIO.HIGH)
-time.sleep(1)
-# adc = MCP3008()
-# sensor1 = adc.read( channel = 0 )
-# sensor2 = adc.read( channel = 1 )
-# sensor3 = adc.read( channel = 2 )
-# sensor4 = adc.read( channel = 3 )
-# sensor5 = adc.read( channel = 4 )
-# sensor6 = adc.read( channel = 5 )
 sensor1, sensor2, sensor3, sensor4, sensor5, sensor6 = readSensors(3) # Anzahl der Zyklen
 
 sensor1 = calc_percent_hum(float(sensor_config['Sensor0']['calibration_output']),sensor1)
@@ -99,7 +75,6 @@ sensor3 = calc_percent_hum(float(sensor_config['Sensor2']['calibration_output'])
 sensor4 = calc_percent_hum(float(sensor_config['Sensor3']['calibration_output']),sensor4)
 sensor5 = calc_percent_hum(float(sensor_config['Sensor4']['calibration_output']),sensor5)
 sensor6 = calc_percent_hum(float(sensor_config['Sensor5']['calibration_output']),sensor6)
-
 
 if sensor1 < 0:
   sensor1 = 0
@@ -114,9 +89,9 @@ if sensor5 < 0:
 if sensor6 < 0:
   sensor6 = 0
 
-time.sleep(1)
-GPIO.output(strom_sensoren, GPIO.LOW)
-time.sleep(0.5)
+#time.sleep(1)
+#GPIO.output(strom_sensoren, GPIO.LOW)
+#time.sleep(0.5)
 
 
 #print(zeitpunkt+"; "+text1+"; {:.1f}%".format(sensor1))
@@ -173,5 +148,3 @@ print(zeitpunkt+",{:.1f}".format(sensor1)+",{:.1f}".format(sensor2)+",{:.1f}".fo
 # Create HTML Plot
 createHtml()
 
-# Cleanup
-GPIO.cleanup()
