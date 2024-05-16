@@ -31,7 +31,8 @@ class MCP3008:
         self.spi.close()
 
 def watering(relay,pump):
-     pass
+    pass
+    print("Starting pump(relais) ", str(relay), " for ", str(pump), " seconds.")
     #GPIO.output(relay, False)
     #time.sleep(pump)
     #GPIO.output(relay, True)

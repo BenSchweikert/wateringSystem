@@ -51,7 +51,6 @@ relais1 = 11
 relais2 = 13
 relais3 = 15
 relais4 = 16
-#relais5 = x
 relais5 = 18
 relais6 = 22
 
@@ -67,6 +66,7 @@ text6 = "Pflanze 6"
 duerr = [0,15,15]
 trocken = [15,25,10]
 feucht = [25,35,5]
+cann = [0,15, 15]
 
 
 # GPIO SETUP
