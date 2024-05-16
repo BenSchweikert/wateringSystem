@@ -144,6 +144,12 @@ elif feucht[0] <= sensor6 <= feucht[1]:
 #print(zeitpunkt+","+str(sensor1)+","+str(sensor2)+","+str(sensor3)+","+str(sensor4)+","+str(sensor5)+","+str(sensor6))
 print(zeitpunkt+",{:.1f}".format(sensor1)+",{:.1f}".format(sensor2)+",{:.1f}".format(sensor3)+",{:.1f}".format(sensor4)+",{:.1f}".format(sensor5)+",{:.1f}".format(sensor6))
 
+strom_sensoren = 5
+time.sleep(2)
+GPIO.output(strom_sensoren, GPIO.LOW)
+time.sleep(0.5)
+GPIO.cleanup()
+
 # Create HTML Plot
 createHtml()
 
