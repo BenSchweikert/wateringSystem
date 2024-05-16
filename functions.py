@@ -59,23 +59,31 @@ def createHtml():
   df['Date'] = pd.to_datetime(df['Date'])
 
   # Create a new Bokeh figure
-  p = figure(x_axis_type="datetime", title="Sensor Readings Over Time", width=1600, height=600, y_range=[0,100])
+  p = figure(x_axis_type="datetime", title="Sensor Readings Over Time", width=1200, height=600, y_range=[0,100])
 
   # Add lines for each sensor
-  p.line(df['Date'], df['Sensor1'], legend_label="Sensor 1", line_width=2, line_color="blue")
-  p.line(df['Date'], df['Sensor2'], legend_label="Sensor 2", line_width=2, line_color="green")
-  p.line(df['Date'], df['Sensor3'], legend_label="Sensor 3", line_width=2, line_color="red")
-  p.line(df['Date'], df['Sensor4'], legend_label="Sensor 4", line_width=2, line_color="orange")
-  p.line(df['Date'], df['Sensor5'], legend_label="Sensor 5", line_width=2, line_color="purple")
-  p.line(df['Date'], df['Sensor6'], legend_label="Sensor 6", line_width=2, line_color="brown")
+  p.line(x='Date', y='Sensor1', source=df, legend_label="Sensor 1", line_width=2, line_color="blue")
+  p.line(x='Date', y='Sensor2', source=df,legend_label="Sensor 2", line_width=2, line_color="green")
+  p.line(x='Date', y='Sensor3', source=df,legend_label="Sensor 3", line_width=2, line_color="red")
+  p.line(x='Date', y='Sensor4', source=df,legend_label="Sensor 4", line_width=2, line_color="orange")
+  p.line(x='Date', y='Sensor5', source=df,legend_label="Sensor 5", line_width=2, line_color="purple")
+  p.line(x='Date', y='Sensor6', source=df,legend_label="Sensor 6", line_width=2, line_color="brown")
 
   # Add legend
   p.legend.location = "top_left"
 
   # Set plot properties
   p.xaxis.axis_label = "Date"
-  p.yaxis.axis_label = "Sensor Value"
+  p.yaxis.axis_label = "Sensor Value %"
 
+  tooltips = [("Date", "@Date{%F %H:%M:%S} - @Sensor1 | @Sensor2 | @Sensor3 | @Sensor4 | @Sensor5 | @Sensor6")]
+  hover = HoverTool(
+    tooltips = tooltips,
+    formatters = {'@Date': 'datetime'},
+    mode = 'vline'
+  )
+  p.add_tools(hover)
+  
   # Set output file
   output_file("//var//www//html//index.html")
 
