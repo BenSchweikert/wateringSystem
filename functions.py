@@ -84,7 +84,14 @@ def createHtml():
   p.xaxis.axis_label = "Date"
   p.yaxis.axis_label = "Sensor Value %"
 
-  tooltips = [("Date", "@Date{%F %H:%M:%S} - @Sensor1 | @Sensor2 | @Sensor3 | @Sensor4 | @Sensor5 | @Sensor6")]
+  #tooltips = [("Date", "@Date{%F %H:%M:%S} | @Sensor1 | @Sensor2 | @Sensor3 | @Sensor4 | @Sensor5 | @Sensor6")]
+  tooltips = [("Date", "@Date{%F %H:%M:%S}"),
+            ("Sensor1", "@Sensor1"),
+            ("Sensor2", "@Sensor2"),
+            ("Sensor3", "@Sensor3"),
+            ("Sensor4", "@Sensor4"),
+            ("Sensor5", "@Sensor5"),
+            ("Sensor6", "@Sensor6")]
   hover = HoverTool(
     tooltips = tooltips,
     formatters = {'@Date': 'datetime'},
