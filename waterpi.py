@@ -124,61 +124,6 @@ if sensor6 < 0:
 else:
    sensor6 = round(sensor6,0)
 
-#time.sleep(1)
-#GPIO.output(strom_sensoren, GPIO.LOW)
-#time.sleep(0.5)
-
-
-#print(zeitpunkt+"; "+text1+"; {:.1f}%".format(sensor1))
-if duerr[0] <= sensor1 <= duerr[1]:
-   watering(relais1,duerr[2])
-elif trocken[0] <= sensor1 <= trocken[1]:
-   watering(relais1,trocken[2])
-elif feucht[0] <= sensor1 <= feucht[1]:
-   watering(relais1,feucht[2])
-
-#print(zeitpunkt+"; "+text2+"; {:.1f}%".format(sensor2))
-if duerr[0] <= sensor2 <= duerr[1]:
-   watering( relais2,duerr[2])
-elif trocken[0] <= sensor2 <= trocken[1]:
-   watering( relais2,trocken[2])
-elif feucht[0] <= sensor2 <= feucht[1]:
-   watering(relais2,feucht[2])
-
-#print(zeitpunkt+"; "+text3+"; {:.1f}%".format(sensor3))
-if duerr[0] <= sensor3 <= duerr[1]:
-   watering(relais3,duerr[2])
-elif trocken[0] <= sensor3 <= trocken[1]:
-   watering(relais3,trocken[2])
-elif feucht[0] <= sensor3 <= feucht[1]:
-   watering(relais3,feucht[2])
-
-#print(zeitpunkt+"; "+text4+"; {:.1f}%".format(sensor4))
-if duerr[0] <= sensor4 <= duerr[1]:
-   watering(relais4,duerr[2])
-elif trocken[0] <= sensor4 <= trocken[1]:
-   watering(relais4,trocken[2])
-elif feucht[0] <= sensor4 <= feucht[1]:
-   watering(relais4,feucht[2])
-
-#print(zeitpunkt+"; "+text5+"; {:.1f}%".format(sensor5))
-if duerr[0] <= sensor5 <= duerr[1]:
-   watering(relais5,duerr[2])
-elif trocken[0] <= sensor5 <= trocken[1]:
-   watering(relais5,trocken[2])
-elif feucht[0] <= sensor5 <= feucht[1]:
-   watering(relais5,feucht[2])
-
-#print(zeitpunkt+"; "+text6+"; {:.1f}%".format(sensor6))
-if duerr[0] <= sensor6 <= duerr[1]:
-   watering(relais6,duerr[2])
-elif trocken[0] <= sensor6 <= trocken[1]:
-   watering(relais6,trocken[2])
-elif feucht[0] <= sensor6 <= feucht[1]:
-   watering(relais6,feucht[2])
-#print(zeitpunkt+",{:.1f}%".format(sensor1)+",{:.1f}%".format(sensor2)+",{:.1f}%".format(sensor3)+",{:.1f}%".format(sensor4)+",{:.1f}%".format(sensor5)+",{:.1f}%".format(sensor6))
-#print(zeitpunkt+","+str(sensor1)+","+str(sensor2)+","+str(sensor3)+","+str(sensor4)+","+str(sensor5)+","+str(sensor6))
-print(zeitpunkt+",{:.1f}".format(sensor1)+",{:.1f}".format(sensor2)+",{:.1f}".format(sensor3)+",{:.1f}".format(sensor4)+",{:.1f}".format(sensor5)+",{:.1f}".format(sensor6))
 new_data = {
     'Date': [zeitpunkt],
     'Sensor1': [sensor1],
@@ -189,13 +134,60 @@ new_data = {
     'Sensor6': [sensor6]
 }
 datenlog = pd.DataFrame(new_data)
+print(datenlog)
 
+# Sensor 1
+if duerr[0] <= sensor1 <= duerr[1]:
+   watering(relais1,duerr[2])
+elif trocken[0] <= sensor1 <= trocken[1]:
+   watering(relais1,trocken[2])
+elif feucht[0] <= sensor1 <= feucht[1]:
+   watering(relais1,feucht[2])
+
+# Sensor 2
+if duerr[0] <= sensor2 <= duerr[1]:
+   watering( relais2,duerr[2])
+elif trocken[0] <= sensor2 <= trocken[1]:
+   watering( relais2,trocken[2])
+elif feucht[0] <= sensor2 <= feucht[1]:
+   watering(relais2,feucht[2])
+
+# Sensor 3
+if duerr[0] <= sensor3 <= duerr[1]:
+   watering(relais3,duerr[2])
+elif trocken[0] <= sensor3 <= trocken[1]:
+   watering(relais3,trocken[2])
+elif feucht[0] <= sensor3 <= feucht[1]:
+   watering(relais3,feucht[2])
+
+# Sensor 4
+if duerr[0] <= sensor4 <= duerr[1]:
+   watering(relais4,duerr[2])
+elif trocken[0] <= sensor4 <= trocken[1]:
+   watering(relais4,trocken[2])
+elif feucht[0] <= sensor4 <= feucht[1]:
+   watering(relais4,feucht[2])
+
+# Sensor 5
+if duerr[0] <= sensor5 <= duerr[1]:
+   watering(relais5,duerr[2])
+elif trocken[0] <= sensor5 <= trocken[1]:
+   watering(relais5,trocken[2])
+elif feucht[0] <= sensor5 <= feucht[1]:
+   watering(relais5,feucht[2])
+
+# Sensor 6
+if duerr[0] <= sensor6 <= duerr[1]:
+   watering(relais6,duerr[2])
+elif trocken[0] <= sensor6 <= trocken[1]:
+   watering(relais6,trocken[2])
+elif feucht[0] <= sensor6 <= feucht[1]:
+   watering(relais6,feucht[2])
+#print(zeitpunkt+",{:.1f}".format(sensor1)+",{:.1f}".format(sensor2)+",{:.1f}".format(sensor3)+",{:.1f}".format(sensor4)+",{:.1f}".format(sensor5)+",{:.1f}".format(sensor6))
 #datenlog=pd.DataFrame(columns=['Date','Sensor1','Sensor2','Sensor3','Sensor4','Sensor5','Sensor6'])
 
 print("Writing datenlog file.")
-print(datenlog)
 datenlog.to_csv(csv_file_path, mode='a', header=False, index=False)
-
 
 # Create HTML Plot
 createHtml()
