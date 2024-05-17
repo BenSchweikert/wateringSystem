@@ -84,6 +84,7 @@ GPIO.output(strom_sensoren, GPIO.HIGH)
 time.sleep(3)
 print("Measuring Sensor Data:")
 sensor1, sensor2, sensor3, sensor4, sensor5, sensor6 = readSensors(3) # Anzahl der Zyklen
+print("Sensor1: ", sensor1, " Sensor2: ", sensor2, " Sensor3: ", sensor3, " Sensor4: ", sensor4, " Sensor5: ", sensor5, " Sensor6: ", sensor6)
 
 time.sleep(2)
 GPIO.output(strom_sensoren, GPIO.LOW)
@@ -141,7 +142,7 @@ elif feucht[0] <= sensor3 <= feucht[1]:
 
 #print(zeitpunkt+"; "+text4+"; {:.1f}%".format(sensor4))
 if duerr[0] <= sensor4 <= duerr[1]:
-   watering(elais4,duerr[2])
+   watering(relais4,duerr[2])
 elif trocken[0] <= sensor4 <= trocken[1]:
    watering(relais4,trocken[2])
 elif feucht[0] <= sensor4 <= feucht[1]:
