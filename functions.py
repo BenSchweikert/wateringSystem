@@ -35,12 +35,18 @@ class MCP3008:
         self.spi.close()
 
 def watering(relay,pump):
-    #pass
-    print("Starting pump(relais) ", str(relay), " for ", str(pump), " seconds.")
-    GPIO.output(relay, False)
-    time.sleep(pump)
-    GPIO.output(relay, True)
-    time.sleep(1)
+  #pass
+  strom_sensoren = 5
+  # GPIO SETUP
+  GPIO.setwarnings(False)                         # Fehlermeldungen deaktivieren
+  GPIO.setmode(GPIO.BOARD)
+  #GPIO.setup(strom_sensoren, GPIO.OUT)
+  GPIO.setup(relay, GPIO.OUT)
+  print("Starting pump(relais) ", str(relay), " for ", str(pump), " seconds.")
+  GPIO.output(relay, False)
+  time.sleep(pump)
+  GPIO.output(relay, True)
+  time.sleep(1)
 
 def load_sensor_config():
     config = configparser.ConfigParser()

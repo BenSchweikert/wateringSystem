@@ -72,16 +72,17 @@ strom_sensoren = 5
 GPIO.setwarnings(False)                         # Fehlermeldungen deaktivieren
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(strom_sensoren, GPIO.OUT)
-GPIO.setup(relais1, GPIO.OUT)
-GPIO.setup(relais2, GPIO.OUT)
-GPIO.setup(relais3, GPIO.OUT)
-GPIO.setup(relais4, GPIO.OUT)
-GPIO.setup(relais5, GPIO.OUT)
-GPIO.setup(relais6, GPIO.OUT)
+#GPIO.setup(relais1, GPIO.OUT)
+#GPIO.setup(relais2, GPIO.OUT)
+#GPIO.setup(relais3, GPIO.OUT)
+#GPIO.setup(relais4, GPIO.OUT)
+#GPIO.setup(relais5, GPIO.OUT)
+#GPIO.setup(relais6, GPIO.OUT)
 
 # SENSOREN ABFRAGEN
 GPIO.output(strom_sensoren, GPIO.HIGH)
 time.sleep(3)
+print("Measuring Sensor Data:")
 sensor1, sensor2, sensor3, sensor4, sensor5, sensor6 = readSensors(3) # Anzahl der Zyklen
 
 time.sleep(2)
