@@ -168,13 +168,13 @@ elif feucht[0] <= sensor6 <= feucht[1]:
 #print(zeitpunkt+","+str(sensor1)+","+str(sensor2)+","+str(sensor3)+","+str(sensor4)+","+str(sensor5)+","+str(sensor6))
 print(zeitpunkt+",{:.1f}".format(sensor1)+",{:.1f}".format(sensor2)+",{:.1f}".format(sensor3)+",{:.1f}".format(sensor4)+",{:.1f}".format(sensor5)+",{:.1f}".format(sensor6))
 new_data = {
-    'Date': zeitpunkt,
-    'Sensor1': sensor1,
-    'Sensor2': sensor2,
-    'Sensor3': sensor3,
-    'Sensor4': sensor4,
-    'Sensor5': sensor5,
-    'Sensor6': sensor6
+    'Date': [zeitpunkt],
+    'Sensor1': [sensor1],
+    'Sensor2': [sensor2],
+    'Sensor3': [sensor3],
+    'Sensor4': [sensor4],
+    'Sensor5': [sensor5],
+    'Sensor6': [sensor6]
 }
 datenlog = pd.DataFrame(new_data)
 
