@@ -34,7 +34,7 @@ class MCP3008:
     def close(self):
         self.spi.close()
 
-def watering(relay,pump):
+def watering(GPIO,relay,pump):
     pass
     GPIO.setup(relay, GPIO.OUT)
     time.sleep(1)
