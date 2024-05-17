@@ -69,6 +69,7 @@ cann = [0,15, 1]
 
 strom_sensoren = 5
 # GPIO SETUP
+print("Setting up GPIO")
 GPIO.setwarnings(False)                         # Fehlermeldungen deaktivieren
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(strom_sensoren, GPIO.OUT)
@@ -174,6 +175,8 @@ datenlog['Sensor3'] = sensor3
 datenlog['Sensor4'] = sensor4
 datenlog['Sensor5'] = sensor5
 datenlog['Sensor6'] = sensor6
+print("Writing datenlog file.")
+print(datenlog)
 datenlog.to_csv(csv_file_path, mode='a', header=False, index=False)
 
 
