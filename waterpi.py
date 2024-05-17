@@ -102,27 +102,27 @@ sensor6 = calc_percent_hum(float(sensor_config['Sensor5']['calibration_output'])
 if sensor1 < 0:
   sensor1 = 0
 else:
-   sensor1 = round(sensor1,1)
+   sensor1 = round(sensor1,0)
 if sensor2 < 0:
   sensor2 = 0
 else:
-   sensor2 = round(sensor2,1)
+   sensor2 = round(sensor2,0)
 if sensor3 < 0:
   sensor3 = 0
 else:
-   sensor3 = round(sensor3,1)
+   sensor3 = round(sensor3,0)
 if sensor4 < 0:
   sensor4 = 0
 else:
-   sensor4 = round(sensor4,1)
+   sensor4 = round(sensor4,0)
 if sensor5 < 0:
   sensor5 = 0
 else:
-   sensor5 = round(sensor5,1)
+   sensor5 = round(sensor5,0)
 if sensor6 < 0:
   sensor6 = 0
 else:
-   sensor6 = round(sensor6,1)
+   sensor6 = round(sensor6,0)
 
 #time.sleep(1)
 #GPIO.output(strom_sensoren, GPIO.LOW)
