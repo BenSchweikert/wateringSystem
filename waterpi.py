@@ -62,22 +62,22 @@ text5 = "Pflanze 5"
 text6 = "Pflanze 6"
 
 # PROZENTWERTE (Minimum,Maximum) und PUMPENDAUER (in Sekunden) FESTLEGEN - [MIN,MAX,DAUER]
-duerr = [0,15,15]
-trocken = [15,25,10]
-feucht = [25,35,5]
-cann = [0,15, 15]
+duerr = [0,15,1]
+trocken = [15,25,1]
+feucht = [25,35,1]
+cann = [0,15, 1]
 
 strom_sensoren = 5
 # GPIO SETUP
 GPIO.setwarnings(False)                         # Fehlermeldungen deaktivieren
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(strom_sensoren, GPIO.OUT)
-#GPIO.setup(relais1, GPIO.OUT)
-#GPIO.setup(relais2, GPIO.OUT)
-#GPIO.setup(relais3, GPIO.OUT)
-#GPIO.setup(relais4, GPIO.OUT)
-#GPIO.setup(relais5, GPIO.OUT)
-#GPIO.setup(relais6, GPIO.OUT)
+GPIO.setup(relais1, GPIO.OUT)
+GPIO.setup(relais2, GPIO.OUT)
+GPIO.setup(relais3, GPIO.OUT)
+GPIO.setup(relais4, GPIO.OUT)
+GPIO.setup(relais5, GPIO.OUT)
+GPIO.setup(relais6, GPIO.OUT)
 
 # SENSOREN ABFRAGEN
 GPIO.output(strom_sensoren, GPIO.HIGH)

@@ -36,13 +36,11 @@ class MCP3008:
 
 def watering(GPIO,relay,pump):
     pass
-    GPIO.setup(relay, GPIO.OUT)
+    print("Starting pump(relais) ", str(relay), " for ", str(pump), " seconds.")
+    GPIO.output(relay, False)
+    time.sleep(pump)
+    GPIO.output(relay, True)
     time.sleep(1)
-    #print("Starting pump(relais) ", str(relay), " for ", str(pump), " seconds.")
-    #GPIO.output(relay, False)
-    #time.sleep(pump)
-    #GPIO.output(relay, True)
-    #time.sleep(1)
 
 def load_sensor_config():
     config = configparser.ConfigParser()
