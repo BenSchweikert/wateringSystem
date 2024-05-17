@@ -36,6 +36,8 @@ class MCP3008:
 
 def watering(relay,pump):
     pass
+    GPIO.setup(relay, GPIO.OUT)
+    time.sleep(1)
     #print("Starting pump(relais) ", str(relay), " for ", str(pump), " seconds.")
     #GPIO.output(relay, False)
     #time.sleep(pump)
@@ -84,7 +86,6 @@ def createHtml():
   p.xaxis.axis_label = "Date"
   p.yaxis.axis_label = "Sensor Value %"
 
-  #tooltips = [("Date", "@Date{%F %H:%M:%S} | @Sensor1 | @Sensor2 | @Sensor3 | @Sensor4 | @Sensor5 | @Sensor6")]
   tooltips = [("Date", "@Date{%F %H:%M:%S}"),
            ("Sensor Values", "Sensor1: @Sensor1, Sensor2: @Sensor2, Sensor3: @Sensor3, Sensor4: @Sensor4, Sensor5: @Sensor5, Sensor6: @Sensor6")]
 
@@ -113,12 +114,13 @@ def calibrateSensor(calibCycles):
   GPIO.setwarnings(False)                         # Fehlermeldungen deaktivieren
   GPIO.setmode(GPIO.BOARD)
   GPIO.setup(strom_sensoren, GPIO.OUT)
-  GPIO.setup(relais1, GPIO.OUT)
-  GPIO.setup(relais2, GPIO.OUT)
-  GPIO.setup(relais3, GPIO.OUT)
-  GPIO.setup(relais4, GPIO.OUT)
-  GPIO.setup(relais5, GPIO.OUT)
-  GPIO.setup(relais6, GPIO.OUT)
+  # Relais GPIO werden nicht benötigt
+  #GPIO.setup(relais1, GPIO.OUT)
+  #GPIO.setup(relais2, GPIO.OUT)
+  #GPIO.setup(relais3, GPIO.OUT)
+  #GPIO.setup(relais4, GPIO.OUT)
+  #GPIO.setup(relais5, GPIO.OUT)
+  #GPIO.setup(relais6, GPIO.OUT)
 
   # SENSOREN ABFRAGEN
   GPIO.output(strom_sensoren, GPIO.HIGH)

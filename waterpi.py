@@ -27,7 +27,7 @@ class MCP3008:
         adc = self.spi.xfer2([1,(8+channel)<<4,0])
         if 0<=adc[1]<=3:
            data = ((adc[1]&3)<<8)+adc[2]
-           #print("Debug RawDataValue: ", data)
+           print("Debug RawDataValue: ", data)
            #per = (680 - data) / 680 * 100               # maximalen Wert testen und 2x eintragen, zB 918; Wert kann nie mehr als 1023 sein!
            #return per
            return data
@@ -41,7 +41,8 @@ sensor_config = load_sensor_config()
 
 # LOG
 zeitpunkt = strftime("%Y-%m-%d %H:%M:00", time.localtime())
-sys.stdout = open("//home//ben//wateringSystem//datenlog.log", "a")
+csv_file_path = '//home//ben//wateringSystem//datenlog.log'
+#sys.stdout = open("//home//ben//wateringSystem//datenlog.log", "a")
 
 
 # PINS FESTLEGEN
@@ -67,22 +68,16 @@ feucht = [25,35,5]
 cann = [0,15, 15]
 
 strom_sensoren = 5
-relais1 = 11
-relais2 = 13
-relais3 = 15
-relais4 = 16
-relais5 = 18
-relais6 = 22
 # GPIO SETUP
 GPIO.setwarnings(False)                         # Fehlermeldungen deaktivieren
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(strom_sensoren, GPIO.OUT)
-GPIO.setup(relais1, GPIO.OUT)
-GPIO.setup(relais2, GPIO.OUT)
-GPIO.setup(relais3, GPIO.OUT)
-GPIO.setup(relais4, GPIO.OUT)
-GPIO.setup(relais5, GPIO.OUT)
-GPIO.setup(relais6, GPIO.OUT)
+#GPIO.setup(relais1, GPIO.OUT)
+#GPIO.setup(relais2, GPIO.OUT)
+#GPIO.setup(relais3, GPIO.OUT)
+#GPIO.setup(relais4, GPIO.OUT)
+#GPIO.setup(relais5, GPIO.OUT)
+#GPIO.setup(relais6, GPIO.OUT)
 
 # SENSOREN ABFRAGEN
 GPIO.output(strom_sensoren, GPIO.HIGH)
@@ -169,6 +164,16 @@ elif feucht[0] <= sensor6 <= feucht[1]:
 #print(zeitpunkt+",{:.1f}%".format(sensor1)+",{:.1f}%".format(sensor2)+",{:.1f}%".format(sensor3)+",{:.1f}%".format(sensor4)+",{:.1f}%".format(sensor5)+",{:.1f}%".format(sensor6))
 #print(zeitpunkt+","+str(sensor1)+","+str(sensor2)+","+str(sensor3)+","+str(sensor4)+","+str(sensor5)+","+str(sensor6))
 print(zeitpunkt+",{:.1f}".format(sensor1)+",{:.1f}".format(sensor2)+",{:.1f}".format(sensor3)+",{:.1f}".format(sensor4)+",{:.1f}".format(sensor5)+",{:.1f}".format(sensor6))
+datenlog=pd.DataFrame(columns=['Date','Sensor1','Sensor2','Sensor3','Sensor4','Sensor5','Sensor6'])
+datenlog['Date'] = zeitpunkt
+datenlog['Sensor1'] = sensor1
+datenlog['Sensor2'] = sensor2
+datenlog['Sensor3'] = sensor3
+datenlog['Sensor4'] = sensor4
+datenlog['Sensor5'] = sensor5
+datenlog['Sensor6'] = sensor6
+datenlog.to_csv(csv_file_path, mode='a', header=False, index=False)
+
 
 # Create HTML Plot
 createHtml()
