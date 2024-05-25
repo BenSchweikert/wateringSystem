@@ -9,8 +9,6 @@ from spidev import SpiDev
 import time
 from time import localtime, strftime
 import configparser
-#import adafruit_dht
-#import board
 
 from functions import *
 
@@ -126,13 +124,6 @@ else:
    sensor6 = round(sensor6,0)
 
 # Temperature and Hum. readout
-#dhtDevice = adafruit_dht.DHT22(board.D4)
-#try:
-#   # Print the values to the serial port
-#   temperature = dhtDevice.temperature
-#   humidity = dhtDevice.humidity
-#except:
-#   pass
 temperature = 0
 humidity = 0
 

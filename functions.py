@@ -182,7 +182,7 @@ def calibrateSensor(calibCycles):
 
 def readSensors(calibCycles):
   adc = MCP3008()
-  dhtDevice = adafruit_dht.DHT22(7)
+  #dhtDevice = adafruit_dht.DHT22(7)
 
   value0 = 0
   value1 = 0
