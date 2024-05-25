@@ -46,20 +46,6 @@ zeitpunkt = strftime("%Y-%m-%d %H:%M:00", time.localtime())
 csv_file_path = '//home//ben//wateringSystem//datenlog.log'
 #sys.stdout = open("//home//ben//wateringSystem//datenlog.log", "a")
 
-dhtDevice = adafruit_dht.DHT22(board.D4)
-
-# you can pass DHT22 use_pulseio=False if you wouldn't like to use pulseio.
-# This may be necessary on a Linux single board computer like the Raspberry Pi,
-# but it will not work in CircuitPython.
-#dhtDevice = adafruit_dht.DHT22(board.D4, use_pulseio=False)
-try:
-   # Print the values to the serial port
-   temperature = dhtDevice.temperature
-   humidity = dhtDevice.humidity
-except:
-   pass
-
-
 # PINS FESTLEGEN
 relais1 = 11
 relais2 = 13
@@ -139,6 +125,16 @@ if sensor6 < 0:
 else:
    sensor6 = round(sensor6,0)
 
+# Temperature and Hum. readout
+dhtDevice = adafruit_dht.DHT22(board.D4)
+try:
+   # Print the values to the serial port
+   temperature = dhtDevice.temperature
+   humidity = dhtDevice.humidity
+except:
+   pass
+
+# Putting Date together
 new_data = {
     'Date': [zeitpunkt],
     'Sensor1': [sensor1],
