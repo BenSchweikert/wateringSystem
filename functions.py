@@ -60,7 +60,7 @@ def calc_percent_hum(configData,data):
   return value
 
 def createHtml():
-  df = pd.read_csv('//home//ben//wateringSystem//datenlog.log', header=None, names=['Date', 'Sensor1', 'Sensor2', 'Sensor3', 'Sensor4', 'Sensor5', 'Sensor6'])
+  df = pd.read_csv('//home//ben//wateringSystem//datenlog.log', header=None, names=['Date', 'Sensor1', 'Sensor2', 'Sensor3', 'Sensor4', 'Sensor5', 'Sensor6', 'Temperature', 'Humidity'])
 
   # Convert 'Date' column to datetime object
   df['Date'] = pd.to_datetime(df['Date'])
@@ -81,6 +81,9 @@ def createHtml():
   p.line(x='Date', y='Sensor4', source=df,legend_label="Sensor 4", line_width=2, line_color="orange")
   p.line(x='Date', y='Sensor5', source=df,legend_label="Sensor 5", line_width=2, line_color="purple")
   p.line(x='Date', y='Sensor6', source=df,legend_label="Sensor 6", line_width=2, line_color="brown")
+
+  p.line(x='Date', y='Temperature', source=df, legend_label="Temperature", line_width=2, line_color='blue', line_dash='dotted')
+  p.line(x='Date', y='Humidity', source=df, legend_label="Humidity", line_width=2, line_color='red', line_dash='dotted')
 
   # Add legend
   p.legend.location = "top_left"

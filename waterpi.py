@@ -9,6 +9,7 @@ from spidev import SpiDev
 import time
 from time import localtime, strftime
 import configparser
+import adafruit_dht
 
 from functions import *
 
@@ -43,6 +44,19 @@ sensor_config = load_sensor_config()
 zeitpunkt = strftime("%Y-%m-%d %H:%M:00", time.localtime())
 csv_file_path = '//home//ben//wateringSystem//datenlog.log'
 #sys.stdout = open("//home//ben//wateringSystem//datenlog.log", "a")
+
+dhtDevice = adafruit_dht.DHT22(board.D4)
+
+# you can pass DHT22 use_pulseio=False if you wouldn't like to use pulseio.
+# This may be necessary on a Linux single board computer like the Raspberry Pi,
+# but it will not work in CircuitPython.
+#dhtDevice = adafruit_dht.DHT22(board.D4, use_pulseio=False)
+try:
+   # Print the values to the serial port
+   temperature = dhtDevice.temperature
+   humidity = dhtDevice.humidity
+except:
+   pass
 
 
 # PINS FESTLEGEN
@@ -131,7 +145,9 @@ new_data = {
     'Sensor3': [sensor3],
     'Sensor4': [sensor4],
     'Sensor5': [sensor5],
-    'Sensor6': [sensor6]
+    'Sensor6': [sensor6],
+    'Temperature':[temperature],
+    'Humidity':[humidity]
 }
 datenlog = pd.DataFrame(new_data)
 print(datenlog)
