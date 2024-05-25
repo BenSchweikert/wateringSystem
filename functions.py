@@ -3,7 +3,7 @@
 #sensorkal.py
 import RPi.GPIO as GPIO
 import adafruit_dht
-from board import D4
+#from board import D4
 import sys
 import spidev
 from spidev import SpiDev
@@ -182,7 +182,7 @@ def calibrateSensor(calibCycles):
 
 def readSensors(calibCycles):
   adc = MCP3008()
-  dhtDevice = adafruit_dht.DHT22(D4)
+  dhtDevice = adafruit_dht.DHT22(7)
 
   value0 = 0
   value1 = 0
