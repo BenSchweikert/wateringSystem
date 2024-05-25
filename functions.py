@@ -2,7 +2,7 @@
 #coding: utf8
 #sensorkal.py
 import RPi.GPIO as GPIO
-import adafruit_dht
+#import adafruit_dht
 #from board import D4
 import sys
 import spidev
