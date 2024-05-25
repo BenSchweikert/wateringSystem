@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 #coding: utf8
 #sensorkal.py
+import Adafruit_DHT
 import RPi.GPIO as GPIO
 #import adafruit_dht
 #from board import D4
