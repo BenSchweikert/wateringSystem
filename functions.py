@@ -184,6 +184,10 @@ def calibrateSensor(calibCycles):
 def readSensors(calibCycles):
   adc = MCP3008()
   #dhtDevice = adafruit_dht.DHT22(7)
+  DHT_SENSOR = Adafruit_DHT.DHT22
+  DHT_PIN = 27
+ 
+  humidity, temperature = Adafruit_DHT.read_retry(DHT_SENSOR, DHT_PIN)
 
   value0 = 0
   value1 = 0
