@@ -188,7 +188,10 @@ def readSensors(calibCycles):
   DHT_PIN = 4
  
   humidity, temperature = Adafruit_DHT.read_retry(DHT_SENSOR, DHT_PIN)
-  print("Temperature: ", temperature, " Humidity: ", humidity )
+  #print("Temperature: ", temperature, " Humidity: ", humidity )
+  temperature = int(round(temperature ,1))
+  humidity = int(round(humidity ,1))
+
   value0 = 0
   value1 = 0
   value2 = 0
@@ -220,4 +223,4 @@ def readSensors(calibCycles):
   value4 = int(round(value4 / (x+1),0))
   value5 = int(round(value5 / (x+1),0))
 
-  return value0, value1, value2, value3, value4, value5
+  return value0, value1, value2, value3, value4, value5, temperature, humidity

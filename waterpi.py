@@ -83,7 +83,7 @@ GPIO.setup(strom_sensoren, GPIO.OUT)
 GPIO.output(strom_sensoren, GPIO.HIGH)
 time.sleep(3)
 print("Measuring Sensor Data:")
-sensor1, sensor2, sensor3, sensor4, sensor5, sensor6 = readSensors(3) # Anzahl der Zyklen
+sensor1, sensor2, sensor3, sensor4, sensor5, sensor6, temperature, humidity = readSensors(3) # Anzahl der Zyklen
 print("Sensor1: ", sensor1, " Sensor2: ", sensor2, " Sensor3: ", sensor3, " Sensor4: ", sensor4, " Sensor5: ", sensor5, " Sensor6: ", sensor6)
 
 time.sleep(2)
@@ -122,10 +122,6 @@ if sensor6 < 0:
   sensor6 = 0
 else:
    sensor6 = round(sensor6,0)
-
-# Temperature and Hum. readout
-temperature = 0
-humidity = 0
 
 # Putting Date together
 new_data = {
