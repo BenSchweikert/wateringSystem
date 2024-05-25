@@ -78,15 +78,15 @@ def createHtml():
   p = figure(x_axis_type="datetime", title="Sensor Readings Over Time", width=1200, height=600, y_range=[-10,100])
 
   # Add lines for each sensor
-  p.line(x='Date', y='Sensor1', source=df, legend_label="Sensor 1", line_width=2, line_color="blue")
-  p.line(x='Date', y='Sensor2', source=df,legend_label="Sensor 2", line_width=2, line_color="green")
-  p.line(x='Date', y='Sensor3', source=df,legend_label="Sensor 3", line_width=2, line_color="red")
-  p.line(x='Date', y='Sensor4', source=df,legend_label="Sensor 4", line_width=2, line_color="orange")
-  p.line(x='Date', y='Sensor5', source=df,legend_label="Sensor 5", line_width=2, line_color="purple")
-  p.line(x='Date', y='Sensor6', source=df,legend_label="Sensor 6", line_width=2, line_color="brown")
+  p.line(x='Date', y='Sensor1', source=df, legend_label="Sensor 1 [%]", line_width=2, line_color="blue")
+  p.line(x='Date', y='Sensor2', source=df,legend_label="Sensor 2 [%]", line_width=2, line_color="green")
+  p.line(x='Date', y='Sensor3', source=df,legend_label="Sensor 3 [%]", line_width=2, line_color="red")
+  p.line(x='Date', y='Sensor4', source=df,legend_label="Sensor 4 [%]", line_width=2, line_color="orange")
+  p.line(x='Date', y='Sensor5', source=df,legend_label="Sensor 5 [%]", line_width=2, line_color="purple")
+  p.line(x='Date', y='Sensor6', source=df,legend_label="Sensor 6 [%]", line_width=2, line_color="brown")
 
-  p.line(x='Date', y='Temperature', source=df, legend_label="Temperature", line_width=2, line_color='blue', line_dash='dotted')
-  p.line(x='Date', y='Humidity', source=df, legend_label="Humidity", line_width=2, line_color='red', line_dash='dotted')
+  p.line(x='Date', y='Temperature', source=df, legend_label="Temperature [°C]", line_width=2, line_color='blue', line_dash='dotted')
+  p.line(x='Date', y='Humidity', source=df, legend_label="Humidity [%]", line_width=2, line_color='red', line_dash='dotted')
 
   # Add legend
   p.legend.location = "top_left"
@@ -94,7 +94,7 @@ def createHtml():
 
   # Set plot properties
   p.xaxis.axis_label = "Date"
-  p.yaxis.axis_label = "Sensor Value %"
+  p.yaxis.axis_label = "Sensor Values"
 
   # Enable grid
   p.xgrid.grid_line_color = 'gray'
