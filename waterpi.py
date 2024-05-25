@@ -9,8 +9,8 @@ from spidev import SpiDev
 import time
 from time import localtime, strftime
 import configparser
-import adafruit_dht
-import board
+#import adafruit_dht
+#import board
 
 from functions import *
 
