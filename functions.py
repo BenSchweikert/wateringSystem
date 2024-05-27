@@ -81,14 +81,14 @@ def createHtml():
   p.ygrid.grid_line_dash = [6, 4]
 
   tooltips = [("Date", "@Date{%F %H:%M:%S}"),
-           ("Sensor1: ","@Sensor1"),
-           ("Sensor2: ","@Sensor2"),
-           ("Sensor3: ","@Sensor3"),
-           ("Sensor4: ","@Sensor4"),
-           ("Sensor5: ","@Sensor5"),
-           ("Sensor6: ","@Sensor6"),
-           ("Temperature: ","@Temperature"),
-           ("Humidity: ","@Humidity")]
+           ("Sensor1: ","@Sensor1 %"),
+           ("Sensor2: ","@Sensor2 %"),
+           ("Sensor3: ","@Sensor3 %"),
+           ("Sensor4: ","@Sensor4 %"),
+           ("Sensor5: ","@Sensor5 %"),
+           ("Sensor6: ","@Sensor6 %"),
+           ("Temperature: ","@Temperature °C"),
+           ("Humidity: ","@Humidity %")]
 
   hover = HoverTool(
     tooltips = tooltips,
