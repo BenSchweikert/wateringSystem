@@ -182,7 +182,7 @@ def calibrateSensor(calibCycles):
   with open('//home//ben//wateringSystem//sensor_config.ini', 'w') as configfile:
     config.write(configfile)
 
-  return value0, value1, value2, value3, value4, value5
+  return value0, value1, value2, value3, value4, value5, temperature, humidity
 
 def readSensors(calibCycles):
   #adc = MCP3008()
@@ -250,16 +250,8 @@ def readSensors(calibCycles):
   #value4 = int(round(value4 / (x+1),0))
   #value5 = int(round(value5 / (x+1),0))
 
-  # Function to remove the lowest value in a column and return the column without it
-  def remove_lowest(series):
-    # Drop the first occurrence of the minimum value
-    return series[series != series.min()]
-
-  # Remove the lowest value per column
-  df_no_min = df.apply(remove_lowest)
-  print(df_no_min)
   # Calculate the mean for each column
-  mean_values = df_no_min.mean()
+  mean_values = df.mean()
   print(mean_values)
   #return value0, value1, value2, value3, value4, value5, temperature, humidity
   return mean_values['Sensor1'], mean_values['Sensor2'], mean_values['Sensor3'], mean_values['Sensor4'], mean_values['Sensor5'], mean_values['Sensor6'], temperature, humidity
