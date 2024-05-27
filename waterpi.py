@@ -13,30 +13,6 @@ from analogue.mcp3008 import MCP3008
 
 from functions import *
 
-# CLASS & FUNCTIONS
-#class MCP3008:
-#    def __init__(self, bus = 0, device = 0):
-#        self.bus, self.device = bus, device
-#        self.spi = SpiDev()
-#        self.open()
-#
-#    def open(self):
-#        self.spi.open(self.bus, self.device)
-#        self.spi.max_speed_hz = 1000000                 # ab Raspbian-Version "Buster" erforderlich!
-#
-#    def read(self, channel = 0):
-#        adc = self.spi.xfer2([1,(8+channel)<<4,0])
-#        if 0<=adc[1]<=3:
-#           data = ((adc[1]&3)<<8)+adc[2]
-#           print("Debug RawDataValue: ", data)
-#           #per = (680 - data) / 680 * 100               # maximalen Wert testen und 2x eintragen, zB 918; Wert kann nie mehr als 1023 sein!
-#           #return per
-#           return data
-#        else:
-#           return 0
-#    def close(self):
-#        self.spi.close()
-
 #GPIO.cleanup()
 sensor_config = load_sensor_config()
 

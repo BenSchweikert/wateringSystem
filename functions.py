@@ -3,8 +3,6 @@
 #sensorkal.py
 import Adafruit_DHT
 import RPi.GPIO as GPIO
-#import adafruit_dht
-#from board import D4
 import sys
 import spidev
 from spidev import SpiDev
@@ -19,34 +17,12 @@ import configparser
 import warnings
 warnings.simplefilter(action='ignore', category=FutureWarning)
 
-#class MCP3008:
-#    def __init__(self, bus = 0, device = 0):
-#        self.bus, self.device = bus, device
-#        self.spi = SpiDev()
-#        self.open()
-#
-#    def open(self):
-#        self.spi.open(self.bus, self.device)
-#        self.spi.max_speed_hz = 1000000                 # ab Raspbian-Version "Buster" erforderlich!
-#
-#    def read(self, channel = 0):
-#        adc = self.spi.xfer2([1,(8+channel)<<4,0])
-#        if 0<=adc[1]<=3:
-#           data = ((adc[1]&3)<<8)+adc[2]
-#           return data
-#        else:
-#           return 0
-#
-#    def close(self):
-#        self.spi.close()
-
 def watering(relay,pump):
   #pass
   strom_sensoren = 5
   # GPIO SETUP
   GPIO.setwarnings(False)                         # Fehlermeldungen deaktivieren
   GPIO.setmode(GPIO.BOARD)
-  #GPIO.setup(strom_sensoren, GPIO.OUT)
   GPIO.setup(relay, GPIO.OUT)
   print("Starting pump(relais) ", str(relay), " for ", str(pump), " seconds.")
   GPIO.output(relay, False)
@@ -60,7 +36,6 @@ def load_sensor_config():
     return config
 
 def calc_percent_hum(configData,data):
-  #(680 - data) / 680 * 100
   value = (configData - data) / configData *100
 #  print("ConfigDate: ", configData, ", Data: ", data)
   return value
@@ -133,13 +108,6 @@ def calibrateSensor(calibCycles):
   GPIO.setwarnings(False)                         # Fehlermeldungen deaktivieren
   GPIO.setmode(GPIO.BOARD)
   GPIO.setup(strom_sensoren, GPIO.OUT)
-  # Relais GPIO werden nicht benötigt
-  #GPIO.setup(relais1, GPIO.OUT)
-  #GPIO.setup(relais2, GPIO.OUT)
-  #GPIO.setup(relais3, GPIO.OUT)
-  #GPIO.setup(relais4, GPIO.OUT)
-  #GPIO.setup(relais5, GPIO.OUT)
-  #GPIO.setup(relais6, GPIO.OUT)
 
   # SENSOREN ABFRAGEN
   GPIO.output(strom_sensoren, GPIO.HIGH)
@@ -185,10 +153,7 @@ def calibrateSensor(calibCycles):
   return value0, value1, value2, value3, value4, value5, temperature, humidity
 
 def readSensors(calibCycles):
-  #adc = MCP3008()
   adc_mcp3008 = MCP3008(max_speed_hz=1_000_000)
-  #ch0 = adc_mcp3008.read_channel(channel=0) 
-
   DHT_SENSOR = Adafruit_DHT.DHT22
   DHT_PIN = 4
  
@@ -208,13 +173,6 @@ def readSensors(calibCycles):
   df = pd.DataFrame(columns=column_names)
 
   for x in range(calibCycles):
-    #print("Calib. Iteration running: ", x+1)
-    #raw0 = adc.read( channel = 0 ) # Den auszulesenden Channel kannst du natürlich anpassen
-    #raw1 = adc.read( channel = 1 ) # Den auszulesenden Channel kannst du natürlich anpassen
-    #raw2 = adc.read( channel = 2 ) # Den auszulesenden Channel kannst du natürlich anpassen
-    #raw3 = adc.read( channel = 3 ) # Den auszulesenden Channel kannst du natürlich anpassen
-    #raw4 = adc.read( channel = 4 ) # Den auszulesenden Channel kannst du natürlich anpassen
-    #raw5 = adc.read( channel = 5 ) # Den auszulesenden Channel kannst du natürlich anpassen
     raw0 = adc_mcp3008.read_channel(channel=0)
     raw1 = adc_mcp3008.read_channel(channel=1)
     raw2 = adc_mcp3008.read_channel(channel=2)
@@ -233,25 +191,9 @@ def readSensors(calibCycles):
 
     # Append the dictionary as a new row to the DataFrame
     df = df.append(row_data, ignore_index=True)
-
-    #value0 = value0 + raw0
-    #value1 = value1 + raw1
-    #value2 = value2 + raw2
-    #value3 = value3 + raw3
-    #value4 = value4 + raw4
-    #value5 = value5 + raw5
-    #print("Calib. Iteration done:", x+1, " -> ", raw0, " ", raw1, " ", raw2, " ", raw3, " ", raw4, " ", raw5)
     time.sleep(1)
   print(df)
-  #value0 = int(round(value0 / (x+1),0))
-  #value1 = int(round(value1 / (x+1),0))
-  #value2 = int(round(value2 / (x+1),0))
-  #value3 = int(round(value3 / (x+1),0))
-  #value4 = int(round(value4 / (x+1),0))
-  #value5 = int(round(value5 / (x+1),0))
-
   # Calculate the mean for each column
   mean_values = df.mean()
   print(mean_values)
-  #return value0, value1, value2, value3, value4, value5, temperature, humidity
   return mean_values['Sensor1'], mean_values['Sensor2'], mean_values['Sensor3'], mean_values['Sensor4'], mean_values['Sensor5'], mean_values['Sensor6'], temperature, humidity
