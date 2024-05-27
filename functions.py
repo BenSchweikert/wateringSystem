@@ -242,7 +242,7 @@ def readSensors(calibCycles):
     #value5 = value5 + raw5
     #print("Calib. Iteration done:", x+1, " -> ", raw0, " ", raw1, " ", raw2, " ", raw3, " ", raw4, " ", raw5)
     time.sleep(1)
-  print(mean_values)
+  print(df)
   #value0 = int(round(value0 / (x+1),0))
   #value1 = int(round(value1 / (x+1),0))
   #value2 = int(round(value2 / (x+1),0))
@@ -257,7 +257,7 @@ def readSensors(calibCycles):
 
   # Remove the lowest value per column
   df_no_min = df.apply(remove_lowest)
-
+  print(df_no_min)
   # Calculate the mean for each column
   mean_values = df_no_min.mean()
   print(mean_values)
