@@ -53,7 +53,7 @@ def createHtml():
   df = df[df['Date'] >= start_date]
 
   # Create a new Bokeh figure
-  p = figure(x_axis_type="datetime", title="Sensor Readings Over Time", width=1200, height=600, y_range=[-10,100])
+  p = figure(x_axis_type="datetime", title="Sensor Roudouts Over Time", width=1200, height=600, y_range=[-10,100])
 
   # Add lines for each sensor
   p.line(x='Date', y='Sensor1', source=df, legend_label="Sensor 1 [%]", line_width=2, line_color="blue")
@@ -98,7 +98,7 @@ def createHtml():
   p.add_tools(hover)
 
   # Set output file
-  output_file("//var//www//html//index.html")
+  output_file("//var//www//html//index.html", title="Grow Plot")
 
   # Save the plot
   save(p)
