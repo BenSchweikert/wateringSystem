@@ -9,32 +9,33 @@ from spidev import SpiDev
 import time
 from time import localtime, strftime
 import configparser
+from analogue.mcp3008 import MCP3008
 
 from functions import *
 
 # CLASS & FUNCTIONS
-class MCP3008:
-    def __init__(self, bus = 0, device = 0):
-        self.bus, self.device = bus, device
-        self.spi = SpiDev()
-        self.open()
-
-    def open(self):
-        self.spi.open(self.bus, self.device)
-        self.spi.max_speed_hz = 1000000                 # ab Raspbian-Version "Buster" erforderlich!
-
-    def read(self, channel = 0):
-        adc = self.spi.xfer2([1,(8+channel)<<4,0])
-        if 0<=adc[1]<=3:
-           data = ((adc[1]&3)<<8)+adc[2]
-           print("Debug RawDataValue: ", data)
-           #per = (680 - data) / 680 * 100               # maximalen Wert testen und 2x eintragen, zB 918; Wert kann nie mehr als 1023 sein!
-           #return per
-           return data
-        else:
-           return 0
-    def close(self):
-        self.spi.close()
+#class MCP3008:
+#    def __init__(self, bus = 0, device = 0):
+#        self.bus, self.device = bus, device
+#        self.spi = SpiDev()
+#        self.open()
+#
+#    def open(self):
+#        self.spi.open(self.bus, self.device)
+#        self.spi.max_speed_hz = 1000000                 # ab Raspbian-Version "Buster" erforderlich!
+#
+#    def read(self, channel = 0):
+#        adc = self.spi.xfer2([1,(8+channel)<<4,0])
+#        if 0<=adc[1]<=3:
+#           data = ((adc[1]&3)<<8)+adc[2]
+#           print("Debug RawDataValue: ", data)
+#           #per = (680 - data) / 680 * 100               # maximalen Wert testen und 2x eintragen, zB 918; Wert kann nie mehr als 1023 sein!
+#           #return per
+#           return data
+#        else:
+#           return 0
+#    def close(self):
+#        self.spi.close()
 
 #GPIO.cleanup()
 sensor_config = load_sensor_config()
@@ -72,12 +73,6 @@ print("Setting up GPIO")
 GPIO.setwarnings(False)                         # Fehlermeldungen deaktivieren
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(strom_sensoren, GPIO.OUT)
-#GPIO.setup(relais1, GPIO.OUT)
-#GPIO.setup(relais2, GPIO.OUT)
-#GPIO.setup(relais3, GPIO.OUT)
-#GPIO.setup(relais4, GPIO.OUT)
-#GPIO.setup(relais5, GPIO.OUT)
-#GPIO.setup(relais6, GPIO.OUT)
 
 # SENSOREN ABFRAGEN
 GPIO.output(strom_sensoren, GPIO.HIGH)
