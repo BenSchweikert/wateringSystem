@@ -146,7 +146,7 @@ def calibrateSensor(calibCycles):
   time.sleep(3)
   config = configparser.ConfigParser()
 
-  value0, value1, value2, value3, value4, value5 = readSensors(calibCycles)
+  value0, value1, value2, value3, value4, value5, temperature, humidity = readSensors(calibCycles)
 
   time.sleep(2)
   GPIO.output(strom_sensoren, GPIO.LOW)
