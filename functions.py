@@ -16,6 +16,7 @@ from bokeh.plotting import figure, output_file, save
 from bokeh.models import HoverTool
 
 import configparser
+import warnings
 warnings.simplefilter(action='ignore', category=FutureWarning)
 
 #class MCP3008:
