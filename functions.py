@@ -16,6 +16,7 @@ from bokeh.plotting import figure, output_file, save
 from bokeh.models import HoverTool
 
 import configparser
+warnings.simplefilter(action='ignore', category=FutureWarning)
 
 #class MCP3008:
 #    def __init__(self, bus = 0, device = 0):
@@ -258,7 +259,6 @@ def readSensors(calibCycles):
 
   # Calculate the mean for each column
   mean_values = df_no_min.mean()
-
+  print(mean_values)
   #return value0, value1, value2, value3, value4, value5, temperature, humidity
-  mean_values
   return mean_values['Sensor1'], mean_values['Sensor2'], mean_values['Sensor3'], mean_values['Sensor4'], mean_values['Sensor5'], mean_values['Sensor6'], temperature, humidity
