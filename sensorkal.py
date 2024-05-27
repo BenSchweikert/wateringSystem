@@ -9,7 +9,7 @@ import time
 
 from functions import *
 
-value0, value1, value2, value3, value4, value5 = calibrateSensor(5)
+value0, value1, value2, value3, value4, value5, temperature, humidity = calibrateSensor(5)
 
 # Maximalwert eintragen (nie mehr als 1023!)
 max = 1023
