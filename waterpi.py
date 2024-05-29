@@ -62,12 +62,12 @@ GPIO.output(strom_sensoren, GPIO.LOW)
 time.sleep(0.5)
 GPIO.cleanup()
 
-sensor1 = calc_percent_hum(float(sensor_config['Sensor0']['calibration_output']),sensor1)
-sensor2 = calc_percent_hum(float(sensor_config['Sensor1']['calibration_output']),sensor2)
-sensor3 = calc_percent_hum(float(sensor_config['Sensor2']['calibration_output']),sensor3)
-sensor4 = calc_percent_hum(float(sensor_config['Sensor3']['calibration_output']),sensor4)
-sensor5 = calc_percent_hum(float(sensor_config['Sensor4']['calibration_output']),sensor5)
-sensor6 = calc_percent_hum(float(sensor_config['Sensor5']['calibration_output']),sensor6)
+sensor1 = calc_percent_hum(float(sensor_config['Sensor0']['calibration_output_air']),float(sensor_config['Sensor0']['calibration_output_water']),sensor1)
+sensor2 = calc_percent_hum(float(sensor_config['Sensor1']['calibration_output_air']),float(sensor_config['Sensor1']['calibration_output_water']),sensor2)
+sensor3 = calc_percent_hum(float(sensor_config['Sensor2']['calibration_output_air']),float(sensor_config['Sensor2']['calibration_output_water']),sensor3)
+sensor4 = calc_percent_hum(float(sensor_config['Sensor3']['calibration_output_air']),float(sensor_config['Sensor3']['calibration_output_water']),sensor4)
+sensor5 = calc_percent_hum(float(sensor_config['Sensor4']['calibration_output_air']),float(sensor_config['Sensor4']['calibration_output_water']),sensor5)
+sensor6 = calc_percent_hum(float(sensor_config['Sensor5']['calibration_output_air']),float(sensor_config['Sensor5']['calibration_output_water']),sensor6)
 
 if sensor1 < 0:
   sensor1 = 0

@@ -35,8 +35,9 @@ def load_sensor_config():
     config.read('//home//ben//wateringSystem//sensor_config.ini')
     return config
 
-def calc_percent_hum(configData,data):
+def calc_percent_hum(configDataAir,configDataWater, measuredData):
   value = (configData - data) / configData *100
+  percentage = round(100-((measuredData - configDataWater) / (configDataAir - configDataWater)) * 100,1)
 #  print("ConfigDate: ", configData, ", Data: ", data)
   return value
 
@@ -154,8 +155,8 @@ def calibrateSensor(calibCycles):
   config['Sensor{}'.format(4)] = {'calibration_output': str(value4)}
   config['Sensor{}'.format(5)] = {'calibration_output': str(value5)}
 
-  with open('//home//ben//wateringSystem//sensor_config.ini', 'w') as configfile:
-    config.write(configfile)
+  #with open('//home//ben//wateringSystem//sensor_config.ini', 'w') as configfile:
+  #  config.write(configfile)
 
   return value0, value1, value2, value3, value4, value5, temperature, humidity
 
