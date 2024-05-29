@@ -182,10 +182,15 @@ def readSensors(calibCycles):
 
   for x in range(calibCycles):
     raw0 = adc_mcp3008.read_channel(channel=0)
+    time.sleep(0.2)
     raw1 = adc_mcp3008.read_channel(channel=1)
+    time.sleep(0.2)
     raw2 = adc_mcp3008.read_channel(channel=2)
+    time.sleep(0.2)
     raw3 = adc_mcp3008.read_channel(channel=3)
+    time.sleep(0.2)
     raw4 = adc_mcp3008.read_channel(channel=4)
+    time.sleep(0.2)
     raw5 = adc_mcp3008.read_channel(channel=5)
 
     row_data = {
