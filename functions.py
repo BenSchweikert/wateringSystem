@@ -36,8 +36,8 @@ def load_sensor_config():
     return config
 
 def calc_percent_hum(configDataAir,configDataWater, measuredData):
-  value = (configData - data) / configData *100
-  percentage = round(100-((measuredData - configDataWater) / (configDataAir - configDataWater)) * 100,1)
+  #value = (configData - data) / configData *100
+  value = round(100-((measuredData - configDataWater) / (configDataAir - configDataWater)) * 100,1)
 #  print("ConfigDate: ", configData, ", Data: ", data)
   return value
 
