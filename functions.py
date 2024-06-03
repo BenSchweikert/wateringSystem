@@ -52,21 +52,21 @@ def createHtml():
   start_date = datetime.now() - timedelta(days=1)
 
   # Filter DataFrame to include only rows within the desired date range
-  df = df[df['Date'] >= start_date]
+  df1 = df[df['Date'] >= start_date]
 
   # Create a new Bokeh figure
   p = figure(x_axis_type="datetime", title="Sensor Readouts Over Time", width=1200, height=400, y_range=[-10,100])
 
   # Add lines for each sensor
-  p.line(x='Date', y='Sensor1', source=df, legend_label="Sensor 1 [%]", line_width=2, line_color="blue")
-  p.line(x='Date', y='Sensor2', source=df,legend_label="Sensor 2 [%]", line_width=2, line_color="green")
-  p.line(x='Date', y='Sensor3', source=df,legend_label="Sensor 3 [%]", line_width=2, line_color="red")
-  p.line(x='Date', y='Sensor4', source=df,legend_label="Sensor 4 [%]", line_width=2, line_color="orange")
-  p.line(x='Date', y='Sensor5', source=df,legend_label="Sensor 5 [%]", line_width=2, line_color="purple")
-  p.line(x='Date', y='Sensor6', source=df,legend_label="Sensor 6 [%]", line_width=2, line_color="brown")
+  p.line(x='Date', y='Sensor1', source=df1, legend_label="Sensor 1 [%]", line_width=2, line_color="blue")
+  p.line(x='Date', y='Sensor2', source=df1,legend_label="Sensor 2 [%]", line_width=2, line_color="green")
+  p.line(x='Date', y='Sensor3', source=df1,legend_label="Sensor 3 [%]", line_width=2, line_color="red")
+  p.line(x='Date', y='Sensor4', source=df1,legend_label="Sensor 4 [%]", line_width=2, line_color="orange")
+  p.line(x='Date', y='Sensor5', source=df1,legend_label="Sensor 5 [%]", line_width=2, line_color="purple")
+  p.line(x='Date', y='Sensor6', source=df1,legend_label="Sensor 6 [%]", line_width=2, line_color="brown")
 
-  p.line(x='Date', y='Temperature', source=df, legend_label="Temperature [°C]", line_width=2, line_color='blue', line_dash='dotted')
-  p.line(x='Date', y='Humidity', source=df, legend_label="Humidity [%]", line_width=2, line_color='red', line_dash='dotted')
+  p.line(x='Date', y='Temperature', source=df1, legend_label="Temperature [°C]", line_width=2, line_color='blue', line_dash='dotted')
+  p.line(x='Date', y='Humidity', source=df1, legend_label="Humidity [%]", line_width=2, line_color='red', line_dash='dotted')
 
   # Add legend
   p.legend.location = "top_left"
@@ -103,21 +103,21 @@ def createHtml():
   start_date = datetime.now() - timedelta(days=7)
 
   # Filter DataFrame to include only rows within the desired date range
-  df = df[df['Date'] >= start_date]
+  df7 = df[df['Date'] >= start_date]
 
   # Create a new Bokeh figure
   p2 = figure(x_axis_type="datetime", title="Sensor Readouts Over Time", width=1200, height=400, y_range=[-10,100])
 
   # Add lines for each sensor
-  p2.line(x='Date', y='Sensor1', source=df, legend_label="Sensor 1 [%]", line_width=2, line_color="blue")
-  p2.line(x='Date', y='Sensor2', source=df,legend_label="Sensor 2 [%]", line_width=2, line_color="green")
-  p2.line(x='Date', y='Sensor3', source=df,legend_label="Sensor 3 [%]", line_width=2, line_color="red")
-  p2.line(x='Date', y='Sensor4', source=df,legend_label="Sensor 4 [%]", line_width=2, line_color="orange")
-  p2.line(x='Date', y='Sensor5', source=df,legend_label="Sensor 5 [%]", line_width=2, line_color="purple")
-  p2.line(x='Date', y='Sensor6', source=df,legend_label="Sensor 6 [%]", line_width=2, line_color="brown")
+  p2.line(x='Date', y='Sensor1', source=df7, legend_label="Sensor 1 [%]", line_width=2, line_color="blue")
+  p2.line(x='Date', y='Sensor2', source=df7,legend_label="Sensor 2 [%]", line_width=2, line_color="green")
+  p2.line(x='Date', y='Sensor3', source=df7,legend_label="Sensor 3 [%]", line_width=2, line_color="red")
+  p2.line(x='Date', y='Sensor4', source=df7,legend_label="Sensor 4 [%]", line_width=2, line_color="orange")
+  p2.line(x='Date', y='Sensor5', source=df7,legend_label="Sensor 5 [%]", line_width=2, line_color="purple")
+  p2.line(x='Date', y='Sensor6', source=df7,legend_label="Sensor 6 [%]", line_width=2, line_color="brown")
 
-  p2.line(x='Date', y='Temperature', source=df, legend_label="Temperature [°C]", line_width=2, line_color='blue', line_dash='dotted')
-  p2.line(x='Date', y='Humidity', source=df, legend_label="Humidity [%]", line_width=2, line_color='red', line_dash='dotted')
+  p2.line(x='Date', y='Temperature', source=df7, legend_label="Temperature [°C]", line_width=2, line_color='blue', line_dash='dotted')
+  p2.line(x='Date', y='Humidity', source=df7, legend_label="Humidity [%]", line_width=2, line_color='red', line_dash='dotted')
 
   # Add legend
   p2.legend.location = "top_left"
