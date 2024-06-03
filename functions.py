@@ -12,6 +12,7 @@ import pandas as pd
 from datetime import datetime, timedelta
 from bokeh.plotting import figure, output_file, save
 from bokeh.models import HoverTool
+from bokeh.layouts import row, column
 
 import configparser
 import warnings
@@ -54,7 +55,7 @@ def createHtml():
   df = df[df['Date'] >= start_date]
 
   # Create a new Bokeh figure
-  p = figure(x_axis_type="datetime", title="Sensor Roudouts Over Time", width=1200, height=600, y_range=[-10,100])
+  p = figure(x_axis_type="datetime", title="Sensor Roudouts Over Time", width=1200, height=400, y_range=[-10,100])
 
   # Add lines for each sensor
   p.line(x='Date', y='Sensor1', source=df, legend_label="Sensor 1 [%]", line_width=2, line_color="blue")
@@ -98,11 +99,64 @@ def createHtml():
   )
   p.add_tools(hover)
 
+  #######
+  start_date = datetime.now() - timedelta(days=1)
+
+  # Filter DataFrame to include only rows within the desired date range
+  df = df[df['Date'] >= start_date]
+
+  # Create a new Bokeh figure
+  p2 = figure(x_axis_type="datetime", title="Sensor Roudouts Over Time", width=1200, height=400, y_range=[-10,100])
+
+  # Add lines for each sensor
+  p2.line(x='Date', y='Sensor1', source=df, legend_label="Sensor 1 [%]", line_width=2, line_color="blue")
+  p2.line(x='Date', y='Sensor2', source=df,legend_label="Sensor 2 [%]", line_width=2, line_color="green")
+  p2.line(x='Date', y='Sensor3', source=df,legend_label="Sensor 3 [%]", line_width=2, line_color="red")
+  p2.line(x='Date', y='Sensor4', source=df,legend_label="Sensor 4 [%]", line_width=2, line_color="orange")
+  p2.line(x='Date', y='Sensor5', source=df,legend_label="Sensor 5 [%]", line_width=2, line_color="purple")
+  p2.line(x='Date', y='Sensor6', source=df,legend_label="Sensor 6 [%]", line_width=2, line_color="brown")
+
+  p2.line(x='Date', y='Temperature', source=df, legend_label="Temperature [°C]", line_width=2, line_color='blue', line_dash='dotted')
+  p2.line(x='Date', y='Humidity', source=df, legend_label="Humidity [%]", line_width=2, line_color='red', line_dash='dotted')
+
+  # Add legend
+  p2.legend.location = "top_left"
+  p2.legend.click_policy = "hide"
+
+  # Set plot properties
+  p2.xaxis.axis_label = "Date"
+  p2.yaxis.axis_label = "Sensor Values"
+
+  # Enable grid
+  p2.xgrid.grid_line_color = 'gray'
+  p2.ygrid.grid_line_color = 'gray'
+  p2.xgrid.grid_line_dash = [6, 4]
+  p2.ygrid.grid_line_dash = [6, 4]
+
+  tooltips = [("Date", "@Date{%F %H:%M:%S}"),
+           ("Sensor1: ","@Sensor1 %"),
+           ("Sensor2: ","@Sensor2 %"),
+           ("Sensor3: ","@Sensor3 %"),
+           ("Sensor4: ","@Sensor4 %"),
+           ("Sensor5: ","@Sensor5 %"),
+           ("Sensor6: ","@Sensor6 %"),
+           ("Temperature: ","@Temperature °C"),
+           ("Humidity: ","@Humidity %")]
+
+  hover = HoverTool(
+    tooltips = tooltips,
+    formatters = {'@Date': 'datetime'},
+    mode = 'mouse'
+  )
+  p2.add_tools(hover)
+  #######
+
   # Set output file
+  layout = column(p, p2)
   output_file("//var//www//html//index.html", title="Grow Plot")
 
   # Save the plot
-  save(p)
+  save(layout)
 
 def calibrateSensor(calibCycles):
   strom_sensoren = 5
