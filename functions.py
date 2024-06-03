@@ -49,13 +49,13 @@ def createHtml():
   df['Date'] = pd.to_datetime(df['Date'])
 
   # Calculate the start date (one week ago from today)
-  start_date = datetime.now() - timedelta(days=7)
+  start_date = datetime.now() - timedelta(days=1)
 
   # Filter DataFrame to include only rows within the desired date range
   df = df[df['Date'] >= start_date]
 
   # Create a new Bokeh figure
-  p = figure(x_axis_type="datetime", title="Sensor Roudouts Over Time", width=1200, height=400, y_range=[-10,100])
+  p = figure(x_axis_type="datetime", title="Sensor Readouts Over Time", width=1200, height=400, y_range=[-10,100])
 
   # Add lines for each sensor
   p.line(x='Date', y='Sensor1', source=df, legend_label="Sensor 1 [%]", line_width=2, line_color="blue")
@@ -100,13 +100,13 @@ def createHtml():
   p.add_tools(hover)
 
   #######
-  start_date = datetime.now() - timedelta(days=1)
+  start_date = datetime.now() - timedelta(days=7)
 
   # Filter DataFrame to include only rows within the desired date range
   df = df[df['Date'] >= start_date]
 
   # Create a new Bokeh figure
-  p2 = figure(x_axis_type="datetime", title="Sensor Roudouts Over Time", width=1200, height=400, y_range=[-10,100])
+  p2 = figure(x_axis_type="datetime", title="Sensor Readouts Over Time", width=1200, height=400, y_range=[-10,100])
 
   # Add lines for each sensor
   p2.line(x='Date', y='Sensor1', source=df, legend_label="Sensor 1 [%]", line_width=2, line_color="blue")
