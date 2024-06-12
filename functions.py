@@ -285,7 +285,8 @@ def smoothData(df):
   x_smooth = np.linspace(x.min(), x.max(), 300)
   spl = make_interp_spline(x, y, k=3)  # BSpline object
   y_smooth = spl(x_smooth)
-  return y_smooth
+  df[['Sensor1']] = y_smooth
+  return df
 
 def remove_non_increasing_dates(df):
     # Ensure the Date column is in datetime format
