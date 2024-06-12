@@ -270,9 +270,11 @@ def readSensors(calibCycles):
   return mean_values['Sensor1'], mean_values['Sensor2'], mean_values['Sensor3'], mean_values['Sensor4'], mean_values['Sensor5'], mean_values['Sensor6'], temperature, humidity
 
 def smoothData(x, y):
-  x_num = x.astype(np.int64) // 10**9
-  x_smooth_num = np.linspace(x_num.min(), x_num.max(), 300)
-  spl = make_interp_spline(x_num,y, k=3)
-  y_smooth = spl(x_smooth_num)
-  x_smooth = pd.to_datetime(x_smooth_num * 10**9)
+  # Convert datetime to numerical (timestamp) values for interpolation
+  x = x.astype(np.int64) // 10**9  # Convert to seconds since epoch
+
+  # Create a B-spline representation of the curve
+  x_smooth = np.linspace(x.min(), x.max(), 300)
+  spl = make_interp_spline(x, y, k=3)  # BSpline object
+  y_smooth = spl(x_smooth)
   return y_smooth
