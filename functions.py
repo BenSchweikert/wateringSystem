@@ -270,7 +270,7 @@ def readSensors(calibCycles):
   return mean_values['Sensor1'], mean_values['Sensor2'], mean_values['Sensor3'], mean_values['Sensor4'], mean_values['Sensor5'], mean_values['Sensor6'], temperature, humidity
 
 def smoothData(x, y):
-  x_smooth = np.linespace(x.min(), x.max(), 300)
+  x_smooth = np.linspace(x.min(), x.max(), 300)
   spl = make_interp_spline(x,y, k=3)
   y_smooth = spl(x_smooth)
   return y_smooth
