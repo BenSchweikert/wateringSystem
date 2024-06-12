@@ -57,6 +57,8 @@ def createHtml():
   # Filter DataFrame to include only rows within the desired date range
   df1 = df[df['Date'] >= start_date]
 
+  df1 = remove_non_increasing_dates(df1)
+
   # Create a new Bokeh figure
   p = figure(x_axis_type="datetime", title="Sensor Readouts Over Time", width=1200, height=400, y_range=[-10,100])
 
@@ -279,3 +281,18 @@ def smoothData(x, y):
   spl = make_interp_spline(x, y, k=3)  # BSpline object
   y_smooth = spl(x_smooth)
   return y_smooth
+
+def remove_non_increasing_dates(df):
+    # Ensure the Date column is in datetime format
+    df['Date'] = pd.to_datetime(df['Date'])
+    
+    # Find the differences between consecutive dates
+    date_diff = df['Date'].diff()
+    
+    # Keep only rows where the date difference is positive (strictly increasing)
+    df_strictly_increasing = df[date_diff > pd.Timedelta(0)]
+    
+    # Always keep the first row, as it has no previous date to compare to
+    df_strictly_increasing = pd.concat([df.iloc[[0]], df_strictly_increasing])
+    
+    return df_strictly_increasing.reset_index(drop=True)
