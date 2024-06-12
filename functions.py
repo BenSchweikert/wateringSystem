@@ -61,7 +61,7 @@ def createHtml():
   p = figure(x_axis_type="datetime", title="Sensor Readouts Over Time", width=1200, height=400, y_range=[-10,100])
 
   # Add lines for each sensor
-  df1[['Date','Sensor1']] = smoothData(df1[['Date','Sensor1']])
+  df1[['Sensor1']] = smoothData(df1[['Date']], df1[['Sensor1']])
   p.line(x='Date', y='Sensor1', source=df1, legend_label="Sensor 1 [%]", line_width=2, line_color="blue")
   p.line(x='Date', y='Sensor2', source=df1,legend_label="Sensor 2 [%]", line_width=2, line_color="green")
   p.line(x='Date', y='Sensor3', source=df1,legend_label="Sensor 3 [%]", line_width=2, line_color="red")
@@ -273,4 +273,4 @@ def smoothData(x, y):
   x_smooth = np.linespace(x.min(), x.max(), 300)
   spl = make_interp_spline(x,y, k=3)
   y_smooth = spl(x_smooth)
-  return x_smooth, y_smooth
+  return y_smooth
