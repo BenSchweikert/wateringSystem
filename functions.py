@@ -57,13 +57,13 @@ def createHtml():
   # Filter DataFrame to include only rows within the desired date range
   df1 = df[df['Date'] >= start_date]
 
-  df1 = remove_non_increasing_dates(df1)
+  #df1 = remove_non_increasing_dates(df1)
 
   # Create a new Bokeh figure
   p = figure(x_axis_type="datetime", title="Sensor Readouts Over Time", width=1200, height=400, y_range=[-10,100])
 
   # Add lines for each sensor
-  df1[['Sensor1']] = smoothData(df1[['Date']], df1[['Sensor1']])
+  df1 = smoothData(df1)
   p.line(x='Date', y='Sensor1', source=df1, legend_label="Sensor 1 [%]", line_width=2, line_color="blue")
   p.line(x='Date', y='Sensor2', source=df1,legend_label="Sensor 2 [%]", line_width=2, line_color="green")
   p.line(x='Date', y='Sensor3', source=df1,legend_label="Sensor 3 [%]", line_width=2, line_color="red")
@@ -271,12 +271,17 @@ def readSensors(calibCycles):
   print(mean_values)
   return mean_values['Sensor1'], mean_values['Sensor2'], mean_values['Sensor3'], mean_values['Sensor4'], mean_values['Sensor5'], mean_values['Sensor6'], temperature, humidity
 
-def smoothData(x, y):
+def smoothData(df):
+  x = df[['Date']]
+  y = df[['Sensor1']]
+
   # Convert datetime to numerical (timestamp) values for interpolation
   x = x.astype(np.int64) // 10**9  # Convert to seconds since epoch
+  for i in range(len(x) - 1):
+    if x[i] <= x[i + 1]:
+        print(f"x[{i}] = {x[i]} is less than x[{i + 1}] = {x[i + 1]}")
+
   # Create a B-spline representation of the curve
-  print(x)
-  print(y)
   x_smooth = np.linspace(x.min(), x.max(), 300)
   spl = make_interp_spline(x, y, k=3)  # BSpline object
   y_smooth = spl(x_smooth)
