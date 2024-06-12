@@ -272,7 +272,7 @@ def readSensors(calibCycles):
 def smoothData(x, y):
   x_num = x.astype(np.int64) // 10**9
   x_smooth_num = np.linspace(x_num.min(), x_num.max(), 300)
-  spl = make_interp_spline(x,y, k=3)
+  spl = make_interp_spline(x_num,y, k=3)
   y_smooth = spl(x_smooth_num)
   x_smooth = pd.to_datetime(x_smooth_num * 10**9)
   return y_smooth
