@@ -274,9 +274,9 @@ def readSensors(calibCycles):
 def smoothData(x, y):
   # Convert datetime to numerical (timestamp) values for interpolation
   x = x.astype(np.int64) // 10**9  # Convert to seconds since epoch
-  if not np.all(np.diff(x) > 0):
-    raise ValueError("x values are not strictly increasing")
   # Create a B-spline representation of the curve
+  print(x)
+  print(y)
   x_smooth = np.linspace(x.min(), x.max(), 300)
   spl = make_interp_spline(x, y, k=3)  # BSpline object
   y_smooth = spl(x_smooth)
