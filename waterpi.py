@@ -11,7 +11,14 @@ from time import localtime, strftime
 import configparser
 from analogue.mcp3008 import MCP3008
 
+import datetime
+
 from functions import *
+
+# CRead Date and Time for Watering Trigger. Watering only at 0, 6, 12 and 18:00
+now = datetime.datetime.now()
+current_hour = now.hour
+current_minute = now.minute
 
 #GPIO.cleanup()
 sensor_config = load_sensor_config()
@@ -38,10 +45,10 @@ text5 = "Pflanze 5"
 text6 = "Pflanze 6"
 
 # PROZENTWERTE (Minimum,Maximum) und PUMPENDAUER (in Sekunden) FESTLEGEN - [MIN,MAX,DAUER]
-duerr = [0,15,1]
-trocken = [15,25,1]
-feucht = [25,35,1]
-cann = [0,15, 1]
+duerr = [2,15,15]
+trocken = [15,25,10]
+feucht = [25,35,5]
+#cann = [1,15, 1]
 
 strom_sensoren = 5
 # GPIO SETUP
@@ -109,55 +116,63 @@ new_data = {
 datenlog = pd.DataFrame(new_data)
 print(datenlog)
 
-# Sensor 1
-if duerr[0] <= sensor1 <= duerr[1]:
-   watering(relais1,duerr[2])
-elif trocken[0] <= sensor1 <= trocken[1]:
-   watering(relais1,trocken[2])
-elif feucht[0] <= sensor1 <= feucht[1]:
-   watering(relais1,feucht[2])
+# Sensor values
+sensors = [sensor1, sensor2, sensor3, sensor4, sensor5, sensor6]
+relais = [relais1, relais2, relais3, relais4, relais5, relais6]
 
-# Sensor 2
-if duerr[0] <= sensor2 <= duerr[1]:
-   watering( relais2,duerr[2])
-elif trocken[0] <= sensor2 <= trocken[1]:
-   watering( relais2,trocken[2])
-elif feucht[0] <= sensor2 <= feucht[1]:
-   watering(relais2,feucht[2])
+if current_hour in {0, 6, 12, 18} and current_minute < 15:
+   print("Watering is allowed and is checked.")
 
-# Sensor 3
-if duerr[0] <= sensor3 <= duerr[1]:
-   watering(relais3,duerr[2])
-elif trocken[0] <= sensor3 <= trocken[1]:
-   watering(relais3,trocken[2])
-elif feucht[0] <= sensor3 <= feucht[1]:
-   watering(relais3,feucht[2])
+   for sensor, relai in zip(sensors, relais):
+    check_and_water(sensor, relai, duerr, trocken, feucht)
 
-# Sensor 4
-if duerr[0] <= sensor4 <= duerr[1]:
-   watering(relais4,duerr[2])
-elif trocken[0] <= sensor4 <= trocken[1]:
-   watering(relais4,trocken[2])
-elif feucht[0] <= sensor4 <= feucht[1]:
-   watering(relais4,feucht[2])
+# # Sensor 1
+# if duerr[0] <= sensor1 <= duerr[1]:
+# watering(relais1,duerr[2])
+# elif trocken[0] <= sensor1 <= trocken[1]:
+# watering(relais1,trocken[2])
+# elif feucht[0] <= sensor1 <= feucht[1]:
+# watering(relais1,feucht[2])
 
-# Sensor 5
-if duerr[0] <= sensor5 <= duerr[1]:
-   watering(relais5,duerr[2])
-elif trocken[0] <= sensor5 <= trocken[1]:
-   watering(relais5,trocken[2])
-elif feucht[0] <= sensor5 <= feucht[1]:
-   watering(relais5,feucht[2])
+# # Sensor 2
+# if duerr[0] <= sensor2 <= duerr[1]:
+# watering( relais2,duerr[2])
+# elif trocken[0] <= sensor2 <= trocken[1]:
+# watering( relais2,trocken[2])
+# elif feucht[0] <= sensor2 <= feucht[1]:
+# watering(relais2,feucht[2])
 
-# Sensor 6
-if duerr[0] <= sensor6 <= duerr[1]:
-   watering(relais6,duerr[2])
-elif trocken[0] <= sensor6 <= trocken[1]:
-   watering(relais6,trocken[2])
-elif feucht[0] <= sensor6 <= feucht[1]:
-   watering(relais6,feucht[2])
-#print(zeitpunkt+",{:.1f}".format(sensor1)+",{:.1f}".format(sensor2)+",{:.1f}".format(sensor3)+",{:.1f}".format(sensor4)+",{:.1f}".format(sensor5)+",{:.1f}".format(sensor6))
-#datenlog=pd.DataFrame(columns=['Date','Sensor1','Sensor2','Sensor3','Sensor4','Sensor5','Sensor6'])
+# # Sensor 3
+# if duerr[0] <= sensor3 <= duerr[1]:
+# watering(relais3,duerr[2])
+# elif trocken[0] <= sensor3 <= trocken[1]:
+# watering(relais3,trocken[2])
+# elif feucht[0] <= sensor3 <= feucht[1]:
+# watering(relais3,feucht[2])
+
+# # Sensor 4
+# if duerr[0] <= sensor4 <= duerr[1]:
+# watering(relais4,duerr[2])
+# elif trocken[0] <= sensor4 <= trocken[1]:
+# watering(relais4,trocken[2])
+# elif feucht[0] <= sensor4 <= feucht[1]:
+# watering(relais4,feucht[2])
+
+# # Sensor 5
+# if duerr[0] <= sensor5 <= duerr[1]:
+# watering(relais5,duerr[2])
+# elif trocken[0] <= sensor5 <= trocken[1]:
+# watering(relais5,trocken[2])
+# elif feucht[0] <= sensor5 <= feucht[1]:
+# watering(relais5,feucht[2])
+
+# # Sensor 6
+# if duerr[0] <= sensor6 <= duerr[1]:
+# watering(relais6,duerr[2])
+# elif trocken[0] <= sensor6 <= trocken[1]:
+# watering(relais6,trocken[2])
+# elif feucht[0] <= sensor6 <= feucht[1]:
+# watering(relais6,feucht[2])
 
 print("Writing datenlog file.")
 datenlog.to_csv(csv_file_path, mode='a', header=False, index=False)

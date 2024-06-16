@@ -34,6 +34,14 @@ def watering(relay,pump):
   GPIO.output(relay, True)
   time.sleep(1)
 
+def check_and_water(sensor, relais, duerr, trocken, feucht):
+    if duerr[0] <= sensor <= duerr[1]:
+        watering(relais, duerr[2])
+    elif trocken[0] <= sensor <= trocken[1]:
+        watering(relais, trocken[2])
+    elif feucht[0] <= sensor <= feucht[1]:
+        watering(relais, feucht[2])
+
 def load_sensor_config():
     config = configparser.ConfigParser()
     config.read('//home//ben//wateringSystem//sensor_config.ini')
