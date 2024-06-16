@@ -11,12 +11,13 @@ from time import localtime, strftime
 import configparser
 from analogue.mcp3008 import MCP3008
 
-import datetime
+#import datetime
+from datetime import datetime, timedelta
 
 from functions import *
 
-# CRead Date and Time for Watering Trigger. Watering only at 0, 6, 12 and 18:00
-now = datetime.datetime.now()
+# Read Date and Time for Watering Trigger. Watering only at 0, 6, 12 and 18:00
+now = datetime.now()
 current_hour = now.hour
 current_minute = now.minute
 
