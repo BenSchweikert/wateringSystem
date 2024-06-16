@@ -121,59 +121,11 @@ print(datenlog)
 sensors = [sensor1, sensor2, sensor3, sensor4, sensor5, sensor6]
 relais = [relais1, relais2, relais3, relais4, relais5, relais6]
 
-#if current_hour in {0, 6, 12, 18} and current_minute < 15:
-print("Watering is allowed and is checked.")
+if current_hour in {0, 6, 12, 18} and current_minute < 15:
+   print("Watering is allowed and is checked.")
 
-for sensor, relai in zip(sensors, relais):
-   check_and_water(sensor, relai, duerr, trocken, feucht)
-
-# # Sensor 1
-# if duerr[0] <= sensor1 <= duerr[1]:
-# watering(relais1,duerr[2])
-# elif trocken[0] <= sensor1 <= trocken[1]:
-# watering(relais1,trocken[2])
-# elif feucht[0] <= sensor1 <= feucht[1]:
-# watering(relais1,feucht[2])
-
-# # Sensor 2
-# if duerr[0] <= sensor2 <= duerr[1]:
-# watering( relais2,duerr[2])
-# elif trocken[0] <= sensor2 <= trocken[1]:
-# watering( relais2,trocken[2])
-# elif feucht[0] <= sensor2 <= feucht[1]:
-# watering(relais2,feucht[2])
-
-# # Sensor 3
-# if duerr[0] <= sensor3 <= duerr[1]:
-# watering(relais3,duerr[2])
-# elif trocken[0] <= sensor3 <= trocken[1]:
-# watering(relais3,trocken[2])
-# elif feucht[0] <= sensor3 <= feucht[1]:
-# watering(relais3,feucht[2])
-
-# # Sensor 4
-# if duerr[0] <= sensor4 <= duerr[1]:
-# watering(relais4,duerr[2])
-# elif trocken[0] <= sensor4 <= trocken[1]:
-# watering(relais4,trocken[2])
-# elif feucht[0] <= sensor4 <= feucht[1]:
-# watering(relais4,feucht[2])
-
-# # Sensor 5
-# if duerr[0] <= sensor5 <= duerr[1]:
-# watering(relais5,duerr[2])
-# elif trocken[0] <= sensor5 <= trocken[1]:
-# watering(relais5,trocken[2])
-# elif feucht[0] <= sensor5 <= feucht[1]:
-# watering(relais5,feucht[2])
-
-# # Sensor 6
-# if duerr[0] <= sensor6 <= duerr[1]:
-# watering(relais6,duerr[2])
-# elif trocken[0] <= sensor6 <= trocken[1]:
-# watering(relais6,trocken[2])
-# elif feucht[0] <= sensor6 <= feucht[1]:
-# watering(relais6,feucht[2])
+   for sensor, relai in zip(sensors, relais):
+      check_and_water(sensor, relai, duerr, trocken, feucht)
 
 print("Writing datenlog file.")
 datenlog.to_csv(csv_file_path, mode='a', header=False, index=False)
