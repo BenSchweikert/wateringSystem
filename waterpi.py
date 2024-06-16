@@ -121,11 +121,11 @@ print(datenlog)
 sensors = [sensor1, sensor2, sensor3, sensor4, sensor5, sensor6]
 relais = [relais1, relais2, relais3, relais4, relais5, relais6]
 
-if current_hour in {0, 6, 12, 18} and current_minute < 15:
-   print("Watering is allowed and is checked.")
+#if current_hour in {0, 6, 12, 18} and current_minute < 15:
+print("Watering is allowed and is checked.")
 
-   for sensor, relai in zip(sensors, relais):
-    check_and_water(sensor, relai, duerr, trocken, feucht)
+for sensor, relai in zip(sensors, relais):
+   check_and_water(sensor, relai, duerr, trocken, feucht)
 
 # # Sensor 1
 # if duerr[0] <= sensor1 <= duerr[1]:
