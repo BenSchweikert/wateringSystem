@@ -45,7 +45,7 @@ def check_and_water(sensor, relais, duerr, trocken, feucht):
     elif feucht[0] <= sensor <= feucht[1]:
         watering(relais, feucht[2])
         water = 1
-    return 0
+    return water
 
 def load_sensor_config():
     config = configparser.ConfigParser()
