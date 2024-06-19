@@ -164,27 +164,27 @@ def createHtml():
 
   filtered_df = df7[df7['Pump1'] == 1]
   if not filtered_df.empty:
-    p.scatter(x=filtered_df['Date'],y=filtered_df['Sensor1'], marker="circle", color="blue", size=12) 
+    p2.scatter(x=filtered_df['Date'],y=filtered_df['Sensor1'], marker="circle", color="blue", size=12) 
 
   filtered_df = df7[df7['Pump2'] == 1]
   if not filtered_df.empty:
-    p.scatter(x=filtered_df['Date'],y=filtered_df['Sensor2'], marker="circle", color="green", size=12) 
+    p2.scatter(x=filtered_df['Date'],y=filtered_df['Sensor2'], marker="circle", color="green", size=12) 
 
   filtered_df = df7[df7['Pump3'] == 1]
   if not filtered_df.empty:
-    p.scatter(x=filtered_df['Date'],y=filtered_df['Sensor3'], marker="circle", color="red", size=12) 
+    p2.scatter(x=filtered_df['Date'],y=filtered_df['Sensor3'], marker="circle", color="red", size=12) 
 
   filtered_df = df7[df7['Pump4'] == 1]
   if not filtered_df.empty:
-    p.scatter(x=filtered_df['Date'],y=filtered_df['Sensor4'], marker="circle", color="orange", size=12) 
+    p2.scatter(x=filtered_df['Date'],y=filtered_df['Sensor4'], marker="circle", color="orange", size=12) 
 
   filtered_df = df7[df7['Pump5'] == 1]
   if not filtered_df.empty:
-    p.scatter(x=filtered_df['Date'],y=filtered_df['Sensor5'], marker="circle", color="purple", size=12) 
+    p2.scatter(x=filtered_df['Date'],y=filtered_df['Sensor5'], marker="circle", color="purple", size=12) 
 
   filtered_df = df7[df7['Pump6'] == 1]
   if not filtered_df.empty:
-    p.scatter(x=filtered_df['Date'],y=filtered_df['Sensor6'], marker="circle", color="brown", size=12) 
+    p2.scatter(x=filtered_df['Date'],y=filtered_df['Sensor6'], marker="circle", color="brown", size=12) 
 
   # Add legend
   p2.legend.location = "top_left"
