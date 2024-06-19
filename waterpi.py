@@ -103,6 +103,42 @@ else:
    sensor6 = round(sensor6,0)
 
 # Putting Date together
+#new_data = {
+#    'Date': [zeitpunkt],
+#    'Sensor1': [sensor1],
+#    'Sensor2': [sensor2],
+#    'Sensor3': [sensor3],
+#    'Sensor4': [sensor4],
+#    'Sensor5': [sensor5],
+#    'Sensor6': [sensor6],
+#    'Temperature':[temperature],
+#    'Humidity':[humidity]
+#}
+#datenlog = pd.DataFrame(new_data)
+#print(datenlog)
+
+# Sensor values
+sensors = [sensor1, sensor2, sensor3, sensor4, sensor5, sensor6]
+relais = [relais1, relais2, relais3, relais4, relais5, relais6]
+pumps = [0, 0, 0, 0, 0, 0]
+
+if current_hour in {0, 6, 12, 18} and current_minute < 15:
+   print("Watering is allowed and is checked.")
+
+   for i, (sensor, relai) in enumerate(zip(sensors, relais)):
+   #for sensor, relai, in zip(sensors, relais):
+      water = check_and_water(sensor, relai, duerr, trocken, feucht)
+      pumps[i] = water
+
+pump1 = pumps[0]
+pump2 = pumps[1]
+pump3 = pumps[2]
+pump4 = pumps[3]
+pump5 = pumps[4]
+pump6 = pumps[5]
+
+
+# Putting Date together
 new_data = {
     'Date': [zeitpunkt],
     'Sensor1': [sensor1],
@@ -112,24 +148,22 @@ new_data = {
     'Sensor5': [sensor5],
     'Sensor6': [sensor6],
     'Temperature':[temperature],
-    'Humidity':[humidity]
+    'Humidity':[humidity],
+    'Pumpe1':[pump1],
+    'Pumpe2':[pump2],
+    'Pumpe3':[pump3],
+    'Pumpe4':[pump4],
+    'Pumpe5':[pump5],
+    'Pumpe6':[pump6]
 }
 datenlog = pd.DataFrame(new_data)
 print(datenlog)
 
-# Sensor values
-sensors = [sensor1, sensor2, sensor3, sensor4, sensor5, sensor6]
-relais = [relais1, relais2, relais3, relais4, relais5, relais6]
-
-if current_hour in {0, 6, 12, 18} and current_minute < 15:
-   print("Watering is allowed and is checked.")
-
-   for sensor, relai in zip(sensors, relais):
-      check_and_water(sensor, relai, duerr, trocken, feucht)
 
 print("Writing datenlog file.")
 datenlog.to_csv(csv_file_path, mode='a', header=False, index=False)
 
 # Create HTML Plot
+print("Creating HTML file.")
 createHtml()
 
