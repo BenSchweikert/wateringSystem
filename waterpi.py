@@ -21,8 +21,9 @@ now = datetime.now()
 current_hour = now.hour
 current_minute = now.minute
 
-#GPIO.cleanup()
+# Load Sensor Calibration Data
 sensor_config = load_sensor_config()
+print(sensor_config)
 
 # LOG
 zeitpunkt = strftime("%Y-%m-%d %H:%M:00", time.localtime())
@@ -70,12 +71,12 @@ GPIO.output(strom_sensoren, GPIO.LOW)
 time.sleep(0.5)
 GPIO.cleanup()
 
-sensor1 = calc_percent_hum(float(sensor_config['Sensor0']['calibration_output_air']),float(sensor_config['Sensor0']['calibration_output_water']),sensor1)
-sensor2 = calc_percent_hum(float(sensor_config['Sensor1']['calibration_output_air']),float(sensor_config['Sensor1']['calibration_output_water']),sensor2)
-sensor3 = calc_percent_hum(float(sensor_config['Sensor2']['calibration_output_air']),float(sensor_config['Sensor2']['calibration_output_water']),sensor3)
-sensor4 = calc_percent_hum(float(sensor_config['Sensor3']['calibration_output_air']),float(sensor_config['Sensor3']['calibration_output_water']),sensor4)
-sensor5 = calc_percent_hum(float(sensor_config['Sensor4']['calibration_output_air']),float(sensor_config['Sensor4']['calibration_output_water']),sensor5)
-sensor6 = calc_percent_hum(float(sensor_config['Sensor5']['calibration_output_air']),float(sensor_config['Sensor5']['calibration_output_water']),sensor6)
+sensor1 = calc_percent_hum(float(sensor_config['Sensor0']['calibration_output_air_0']),float(sensor_config['Sensor0']['calibration_output_water_0']),sensor1)
+sensor2 = calc_percent_hum(float(sensor_config['Sensor1']['calibration_output_air_1']),float(sensor_config['Sensor1']['calibration_output_water_1']),sensor2)
+sensor3 = calc_percent_hum(float(sensor_config['Sensor2']['calibration_output_air_2']),float(sensor_config['Sensor2']['calibration_output_water_2']),sensor3)
+sensor4 = calc_percent_hum(float(sensor_config['Sensor3']['calibration_output_air_3']),float(sensor_config['Sensor3']['calibration_output_water_3']),sensor4)
+sensor5 = calc_percent_hum(float(sensor_config['Sensor4']['calibration_output_air_4']),float(sensor_config['Sensor4']['calibration_output_water_4']),sensor5)
+sensor6 = calc_percent_hum(float(sensor_config['Sensor5']['calibration_output_air_5']),float(sensor_config['Sensor5']['calibration_output_water_5']),sensor6)
 
 if sensor1 < 0:
   sensor1 = 0
@@ -101,21 +102,6 @@ if sensor6 < 0:
   sensor6 = 0
 else:
    sensor6 = round(sensor6,0)
-
-# Putting Date together
-#new_data = {
-#    'Date': [zeitpunkt],
-#    'Sensor1': [sensor1],
-#    'Sensor2': [sensor2],
-#    'Sensor3': [sensor3],
-#    'Sensor4': [sensor4],
-#    'Sensor5': [sensor5],
-#    'Sensor6': [sensor6],
-#    'Temperature':[temperature],
-#    'Humidity':[humidity]
-#}
-#datenlog = pd.DataFrame(new_data)
-#print(datenlog)
 
 # Sensor values
 sensors = [sensor1, sensor2, sensor3, sensor4, sensor5, sensor6]

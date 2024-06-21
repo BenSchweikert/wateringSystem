@@ -55,7 +55,7 @@ def load_sensor_config():
 def calc_percent_hum(configDataAir,configDataWater, measuredData):
   #value = (configData - data) / configData *100
   value = round(100-((measuredData - configDataWater) / (configDataAir - configDataWater)) * 100,1)
-#  print("ConfigDate: ", configData, ", Data: ", data)
+  print("Meas. Data: ", measuredData, " Water: ", configDataWater, " Air: ", configDataAir)
   return value
 
 def createHtml():
@@ -326,7 +326,7 @@ def readSensors(calibCycles):
     # Append the dictionary as a new row to the DataFrame
     df = df.append(row_data, ignore_index=True)
     time.sleep(1)
-  print(df)
+  #print(df)
   # Calculate the mean for each column
   mean_values = df.mean()
   print(mean_values)
