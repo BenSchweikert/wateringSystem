@@ -49,7 +49,7 @@ text6 = "Pflanze 6"
 # PROZENTWERTE (Minimum,Maximum) und PUMPENDAUER (in Sekunden) FESTLEGEN - [MIN,MAX,DAUER]
 duerr = [5,20,40]
 trocken = [20,30,30]
-feucht = [30,40,20]
+feucht = [30,60,20]
 #cann = [1,15, 1]
 
 strom_sensoren = 5
